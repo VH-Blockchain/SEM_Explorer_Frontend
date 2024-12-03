@@ -1,0 +1,65 @@
+.info-line {
+  padding: 41px;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center !important;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x) !important;
+  color: var(--bs-card-color) !important;
+}
+
+.address-card {
+  width: 700px;
+  margin-left: 150px;
+  margin-top: 70px;
+}
+
+.single-line {
+  text-align: justify;
+}
+
+.upload-file {
+  align-items: center;
+  display: flex;
+  justify-content: start;
+}
+
+.file-input {
+  padding: 4px;
+}
+
+.stp-btn {
+  color: black !important;
+  background-color: #8f8f6e36 !important  ;
+}
+
+// .first-btn {
+//   background-color: #f7971c !important;
+//   color: black !important;
+// }
+
+// .second-btn {
+//   background-color: red !important;
+//   color: white !important;
+// }
+
+// .third-btn {
+//   background-color: #66a8e1 !important;
+//   color: white !important;
+// }
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.px-4 {
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+}
+.me-2 {
+  margin-right: 0.5rem !important;
+}

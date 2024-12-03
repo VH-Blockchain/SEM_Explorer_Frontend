@@ -1,0 +1,119 @@
+.table-wrapper {
+    overflow-y: hidden;
+
+    table {
+        width: 100%;
+        min-width: 400px;
+        border-spacing: 0;
+        border-left: 1px solid var(--table-border);
+        border-top: 1px solid var(--table-border);
+    }
+    
+    thead {
+        background-color: var(--table-th-bg);
+        // background-color: var(--main-bg-dark);
+        // color: var(--text-white);
+    }
+    
+    tr {
+        text-align: left;
+        position: relative;
+    }
+    
+    th{
+        text-transform: capitalize;
+        padding: 15px 10px;
+        border-right: 1px solid var(--table-th-border);
+        border-bottom: 1px solid var(--table-border);
+        font-size: 15px;
+    }
+    td {
+        text-transform: capitalize;
+        padding: 15px 10px;
+        border-right: 1px solid var(--table-border);
+        border-bottom: 1px solid var(--table-border);
+        font-size: 14px;
+    }
+    
+    tbody > tr:hover {
+        background-color: var(--main-color);
+        color: var(--txt-white);
+        cursor: pointer;
+        a {
+            color: var(--txt-white);
+        }
+    }
+    tbody > tr:hover {
+        td {
+            // border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+.table__pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    h3 {
+        font-size: 0.925rem;
+        font-weight: 400;
+    }
+}
+
+.table__pagination-item ~ .table__pagination-item {
+    margin-left: 10px;
+}
+
+.table__pagination-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.table__pagination-item.active, .table__pagination-item.active:hover {
+    background-color: var(--main-color);
+    color: var(--txt-white);
+    font-weight: 600;
+}
+
+.table__pagination-item :hover {
+    color: var(--txt-white);
+    background-color: var(--second-color);
+}
+
+.btn-wrape {
+    display: flex;
+    gap: 10px;
+    button {
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 0;
+        i {
+            font-size: 18px;
+            line-height: 1;
+        }
+    }
+}
+.api-key-table {
+    .table-wrapper table {
+        border-top: none;
+        border-left: none;
+    }
+    .table-wrapper thead{
+        background: transparent;
+    }
+    .table-wrapper th{
+        border-right: none;
+    }
+    .table-wrapper td{
+        border-right: none;
+    }
+}

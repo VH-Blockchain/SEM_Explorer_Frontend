@@ -1,0 +1,392 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import StatusCard from "../../status-card/StatusCard";
+import Chart, { ChartSeries } from "../../Chart/Chart";
+import Table from "../../table/Table";
+
+import { getPrice } from "../../../services/binance";
+import { SelectChangeEvent } from "@mui/material";
+import {
+  getLatestBlock,
+  calculateGas,
+  timestampToMinutes,
+} from "../../../services/web3";
+
+import Grid from "@mui/material/Grid";
+
+import "./home.scss";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  Select,
+} from "@mui/material";
+import { MenuItem } from "react-pro-sidebar";
+
+const Home: React.FC = () => {
+  const [cardInfo, setCardInfo] = useState({
+    bnbPrice: "?",
+    latestBlock: "?",
+    txCount: "?",
+    blockTime: "?",
+  });
+
+  const [gasPriceChart, setGasPriceChart] = useState<{
+    series: ChartSeries;
+    timeAt: string[];
+  }>({
+    series: [
+      { name: "Min Price", data: [] },
+      { name: "Max Price", data: [] },
+      { name: "Avg Price", data: [] },
+    ],
+    timeAt: [],
+  });
+
+  const [latestBlocks, setLatestBlocks] = useState<
+    Array<{
+      number: number | string;
+      txs: number | string;
+      timeAt: string;
+      bnbPrice: string;
+    }>
+  >([]);
+
+  const [latestTransactions, setLatestTransactions] = useState<
+    Array<{
+      hash: string;
+      from: string;
+      to: string | null;
+      value: string;
+    }>
+  >([]);
+  const [limit, setLimit] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalTx, setTotalTx] = useState<number>(0);
+  const [lastPage, setLastPage] = useState<number>(0);
+
+  const changePage = async (_page: number) => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}internal/txs?page=${_page}&limit=${limit}`
+    );
+    console.log(response, "response");
+    setCurrentPage(response.data.data?.meta.current_page);
+    setLimit(response.data.data?.meta?.per_page);
+    setTotalTx(response.data.data?.meta?.total);
+    setLastPage(response.data.data?.meta?.last_page);
+
+    setLatestTransactions((prevTransactions) => {
+      const prevHashes = prevTransactions.map((tx) => tx.hash);
+      const newTransactions = response.data.data.transactions
+        .filter((tx: any) => !prevHashes.includes(tx.hash))
+        .map((tx: any) => {
+          return {
+            hash: tx.transaction_hash,
+            from: tx.from,
+            to: tx.to,
+            value: (tx.value / 10 ** 18).toString(),
+          };
+        });
+      return [...newTransactions, ...prevTransactions];
+    });
+  };
+
+  useEffect(() => {
+    const updateInfo = async () => {
+      const bnbPrice = await getPrice("BNB", "USDT").then(
+        (quote) => Number(quote.price).toFixed(2) + "$"
+      );
+      const block = await getLatestBlock();
+      const gas = calculateGas(block);
+      const timeAt = timestampToMinutes(block);
+
+      const updateChart = () => {
+        setGasPriceChart((prevGasPriceChart) => {
+          const min = prevGasPriceChart.series[0];
+          const max = prevGasPriceChart.series[1];
+          const avg = prevGasPriceChart.series[2];
+
+          const update = (
+            array: number[],
+            newValue: number,
+            sliceBy: number = -9
+          ): number[] => {
+            return [...array.slice(sliceBy), newValue];
+          };
+
+          return {
+            ...prevGasPriceChart,
+            series: [
+              { ...min, data: update(min.data, gas.min) },
+              { ...max, data: update(max.data, gas.max) },
+              { ...avg, data: update(avg.data, gas.avg) },
+            ],
+            timeAt: [...prevGasPriceChart.timeAt.slice(-9), timeAt],
+          };
+        });
+      };
+
+      const updateStatusCard = () => {
+        setCardInfo({
+          bnbPrice,
+          latestBlock: block.number.toString(),
+          txCount: block.transactions.length.toString(),
+          blockTime: timeAt,
+        });
+      };
+
+      const updateTables = async () => {
+        setLatestBlocks((prevBlocks) => {
+          const blockExistsInTable = prevBlocks.find(
+            (blck) => blck.number === block.number
+          );
+          if (blockExistsInTable) return prevBlocks;
+
+          return [
+            {
+              number: block.number,
+              txs: block.transactions.length,
+              timeAt: timeAt,
+              bnbPrice: bnbPrice,
+            },
+            ...prevBlocks,
+          ];
+        });
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}internal/txs?page=${currentPage}&limit=${limit}`
+        );
+        console.log(response, "response");
+        setCurrentPage(response.data.data?.meta.current_page);
+        setLimit(response.data.data?.meta?.per_page);
+        setTotalTx(response.data.data?.meta?.total);
+        setLastPage(response.data.data?.meta?.last_page);
+
+        setLatestTransactions((prevTransactions) => {
+          const prevHashes = prevTransactions.map((tx) => tx.hash);
+          const newTransactions = response.data.data.transactions
+            .filter((tx: any) => !prevHashes.includes(tx.hash))
+            .map((tx: any) => {
+              return {
+                hash: tx.transaction_hash,
+                from: tx.from,
+                to: tx.to,
+                value: (tx.value / 10 ** 18).toString(),
+              };
+            });
+          return [...newTransactions, ...prevTransactions];
+        });
+      };
+      updateStatusCard();
+      updateChart();
+      updateTables();
+    };
+
+    updateInfo();
+
+    const updateBlocks = async () => {
+      const block = await getLatestBlock();
+      const timeAt = timestampToMinutes(block);
+      const bnbPrice = await getPrice("BNB", "USDT").then(
+        (quote) => Number(quote.price).toFixed(2) + "$"
+      );
+      setLatestBlocks((prevBlocks) => {
+        const blockExistsInTable = prevBlocks.find(
+          (blck) => blck.number === block.number
+        );
+        if (blockExistsInTable) return prevBlocks;
+
+        return [
+          {
+            number: block.number,
+            txs: block.transactions.length,
+            timeAt: timeAt,
+            bnbPrice: bnbPrice,
+          },
+          ...prevBlocks,
+        ];
+      });
+    };
+    const cardInfoHandler = setInterval(updateBlocks, 2500);
+    return () => clearInterval(cardInfoHandler);
+  }, []);
+
+  // for open handleChangedropdown
+
+  // for open handleChangedropdown
+
+  const [selectedValue, setSelectedValue] = useState<string>("10"); // State for selected value
+
+  const handleChangedropdown = (event: SelectChangeEvent<string>) => {
+    setSelectedValue(event.target.value); // The value is already a string, no need for casting
+  };
+
+  return (
+    <div className="layout-inner-wrape">
+      <section>
+        <div className="top-title-sec">
+          <h3 className="top-title">SEM blockchain explorer</h3>
+          <div className="title-button-sec">
+            <div className="btn-sec">
+              <Button className="refresh-btn">Refresh</Button>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="mt-30">
+        <Grid container spacing={3}>
+          <Grid item lg={6} xs={12}>
+            <div className="card">
+              {/* <div className="card__header">
+                <Button></Button>
+              </div> */}
+              <div className="card-header">
+                <div className="btn-sec">
+                  <Button className="refresh-btn active">Refresh</Button>
+                  <Button className="refresh-btn">Transaction</Button>
+                  <Button className="refresh-btn">Network hashrate</Button>
+                  <Button className="refresh-btn">Token Price</Button>
+                  <Button className="refresh-btn">Total wallets</Button>
+                  <Button className="refresh-btn">arroe</Button>
+                </div>
+                <div className="drop-sec">12d</div>
+              </div>
+              <div className="card__body api-key-table">
+                <div className="gradient-text-sec d-flex">
+                  <h5 className="gradient-text">24,049,204</h5>
+                  <span className="small-text">+1.23%</span>
+                </div>
+              </div>
+            </div>
+          </Grid>
+          <Grid item lg={6} xs={12}>
+            {/* <div className="card"> */}
+            <section className="">
+              <Grid container spacing={3}>
+                <Grid item lg={12} xs={12}>
+                  <div className="card">
+                    <div className="card__header">
+                      <h3>Latest Transactions:</h3>
+                    </div>
+                    <div className="card__body api-key-table  home-trans-table">
+                      <Table
+                        thead={() => {
+                          return (
+                            <tr>
+                              <th>Tx</th>
+                              <th>From</th>
+                              <th>To</th>
+                              <th>Value</th>
+                            </tr>
+                          );
+                        }}
+                        tbody={latestTransactions.map((tx) => {
+                          return () => {
+                            return (
+                              <tr key={tx.hash}>
+                                <td>
+                                  <Link to={`tx/${tx.hash}`}>
+                                    {tx.hash.slice(0, 10) + "..."}
+                                  </Link>
+                                </td>
+                                <td>
+                                  <Link to={`/address/${tx.from}`}>
+                                    {tx.from.slice(0, 20) + "..."}
+                                  </Link>
+                                </td>
+                                <td>
+                                  <Link to={`/address/${tx.to}`}>
+                                    {tx.to ? tx.to.slice(0, 20) + "..." : "-"}
+                                  </Link>
+                                </td>
+                                <td>{tx.value}</td>
+                              </tr>
+                            );
+                          };
+                        })}
+                        limit={limit}
+                        pagesLimit={lastPage}
+                      />
+                      {latestTransactions.length > 0 && (
+                        <div className="table__pagination">
+                          <h3>
+                            Page {currentPage} of {lastPage}
+                          </h3>
+                          <div className="btn-wrape">
+                            {limit * currentPage > limit && (
+                              <button
+                                className="btn"
+                                onClick={() => {
+                                  changePage(Number(currentPage) - 1);
+                                }}
+                              >
+                                <i className="bx bx-left-arrow-alt"></i> Back
+                              </button>
+                            )}
+                            {true && (
+                              <>
+                                <button className="btn" onClick={() => {
+                                  changePage(Number(currentPage) + 1)
+                                }}>Next <i className="bx bx-right-arrow-alt"></i></button>
+                              </>
+                              // <button className="btn">View</button>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item lg={12} xs={12}>
+                  <div className="card">
+                    <div className="card__header">
+                      <h3 data-tooltip="test">Latest Blocks:</h3>
+                    </div>
+                    <div className="card__body api-key-table">
+                      <Table
+                        thead={() => {
+                          return (
+                            <tr>
+                              <th>Number</th>
+                              <th>Tx Count</th>
+                              <th>Time At</th>
+                              <th>B4Fire Price</th>
+                            </tr>
+                          );
+                        }}
+                        tbody={latestBlocks.map((block) => {
+                          return () => {
+                            return (
+                              <tr key={block.number}>
+                                <td>
+                                  <Link to={`/block/${block.number}`}>
+                                    {block.number}
+                                  </Link>
+                                </td>
+                                <td>{block.txs}</td>
+                                <td>{block.timeAt}</td>
+                                <td>NA</td>
+                              </tr>
+                            );
+                          };
+                        })}
+                        limit={10}
+                        pagesLimit={5}
+                      />
+                    </div>
+                  </div>
+                </Grid>
+              </Grid>
+            </section>
+            {/* </div> */}
+          </Grid>
+        </Grid>
+      </section>
+    </div>
+  );
+};
+
+export default Home;

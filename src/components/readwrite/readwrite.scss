@@ -1,0 +1,66 @@
+
+.rw-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search-box {
+    width: 523px;
+}
+
+.search-btn{
+    background-color: darkgoldenrod !important;
+    color: beige !important;
+    margin-left: 13px !important;
+    width: 136px !important;
+}
+
+.input-wrape {
+    width: 100%;
+    .input-pad {
+        width: 100%;        
+    }
+    .MuiFormControl-root {
+        width: 100%;
+    }
+}
+.MuiAccordion-root.MuiAccordion-gutters {
+    background: var(--accr-base-color);
+    svg {
+        color: var(--input-color);
+    }
+}
+.MuiButtonBase-root.Mui-expanded.MuiAccordionSummary-gutters {
+    background: var(--accr-button-color);
+}
+
+.parent-ctrl-wrape {
+    width: 100%;
+    display: flex;
+    .input-wrape {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        p {
+            white-space: nowrap;
+            padding-right: 20px;
+            margin-bottom: 0;
+        }
+        .input-pad {
+            position: relative;
+            button {
+                position: absolute;
+                right: 6px;
+                top: 6px;
+            }
+        }
+    }
+}
+.MuiAccordion-root.disable-click {
+    pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+
+}

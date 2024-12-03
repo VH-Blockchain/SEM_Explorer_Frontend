@@ -1,0 +1,24 @@
+.footer-main {
+  padding: 15px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--main-bg);
+  p {
+    color: #fff;
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  ul li {
+    padding: 0 30px;
+    a {
+      font-size: 15px;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+}
+.theme-mode-light .footer-main p,
+.theme-mode-light .footer-main ul li a {
+  color: var(--txt-color);
+}

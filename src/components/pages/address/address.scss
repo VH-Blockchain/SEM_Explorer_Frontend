@@ -1,0 +1,88 @@
+.address-info__card {
+    word-wrap: break-word;
+    padding: 30px;
+    margin-bottom: 0;
+    background-color: var(--main-bg);
+    box-shadow: var(--box-shadow);
+    border: 2px solid;
+    border-radius: var(--border-radius);
+    border-color: var(--second-color);
+    h2 {
+        font-size: 20px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &.powered-by {
+        width: auto;
+        display: table;
+        margin: auto;
+    }
+}
+
+.address-info__footer {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .address-info__card {
+        font-size: 16px;
+        padding: 13px 16px;
+    }
+    .address-info__footer {
+        font-size: 12px;
+    }
+    .address-info__card h2 {
+        font-size: 16px;
+    }
+}
+.add-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    h2{
+        font-size: 20px;
+        margin-bottom: 0;
+        color: white;
+        span{
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+        }
+    }
+    button{
+        min-width: 24px;
+        padding: 0;
+        margin-left: 5px;
+    }
+}
+.balance-card{
+    border-left: 5px solid var(--second-color);
+    min-height: 115px;
+    max-height: 100%;
+    .address-info__card{
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    .add-title{
+        margin-bottom: 0;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    h2{
+        font-size: 14px;
+        span{
+            font-size: 16px;
+        }
+    }
+}
+.contract-code-title{
+    h1{
+        font-size: 30px;
+    }
+}
