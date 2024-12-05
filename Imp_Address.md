@@ -1,4 +1,4 @@
-## B4Hit Network
+## SEM Network
 * Contract address for knowing contract address or User account address:    
 `` 
 

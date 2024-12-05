@@ -82,9 +82,9 @@ const Header: React.FC = () => {
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
+            onClick={() => navigate("/")}
           >
-            Overview 
+            Home
           </Button>
           {/* <Menu
             id="basic-menu"
@@ -107,9 +107,9 @@ const Header: React.FC = () => {
             aria-controls={open2 ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open2 ? "true" : undefined}
-            onClick={handleClick2}
+            onClick={() => navigate("/AllTransactions")}
           >
-            Transaction 
+            Transaction
           </Button>
           {/* <Menu
             id="basic-menu"
@@ -145,23 +145,23 @@ const Header: React.FC = () => {
             }}
           >
             <MenuItem onClick={() => navigate('/plans')}>API Plans</MenuItem>
-            <MenuItem><a href="https://paritas-organization.gitbook.io/b4fire/" target="_blank">
+            <MenuItem><a href="https://paritas-organization.gitbook.io/SEMfire/" target="_blank">
               API Documentation
             </a></MenuItem>
           </Menu>
         </li> */}
 
         <li>
-          <Button className="nav-items" onClick={() => navigate("/faucet")}>Blocks</Button>
+          <Button className="nav-items" onClick={() => navigate("/Blocks")}>Blocks</Button>
         </li>
 
         {/* {!token ? ( */}
-          <li>
-            <Button className="nav-items" onClick={() => navigate("/sign-in")}>Accounts</Button>
-          </li>
-          <li>
-          <Button className="nav-items" onClick={() => navigate("/faucet")}>NFTs</Button>
+        <li>
+          <Button className="nav-items" onClick={() => navigate("/sign-up")}>Accounts</Button>
         </li>
+        {/* <li>
+          <Button className="nav-items" onClick={() => navigate("/faucet")}>NFTs</Button>
+        </li> */}
         {/* ) : (
           <>
 
@@ -185,8 +185,8 @@ const Header: React.FC = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>B4Fire Testnet</MenuItem>
-                <MenuItem onClick={handleClose}>B4Fire Mainnet</MenuItem>
+                <MenuItem onClick={handleClose}>SEMTestnet</MenuItem>
+                <MenuItem onClick={handleClose}>SEMMainnet</MenuItem>
               </Menu>
             </li>
             <li>
@@ -219,16 +219,11 @@ const Header: React.FC = () => {
       </ul>
 
       <div className="header__right">
-        {/* <Search /> */}
-
         <div className="header__right-item">
           <ThemesMenu />
         </div>
-
         <div>
-
         </div>
-        {/* </div> */}
       </div>
     </div>
   );

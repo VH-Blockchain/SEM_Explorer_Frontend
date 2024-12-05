@@ -26,7 +26,7 @@ const Faucet = () => {
             console.log("result", response);
 
             if (response.status == 200) {
-                toast.success("Send B4Fire SuccessFully")
+                toast.success("Send SEMSuccessFully")
             }
         } catch (error: any) {
             console.error("Error:", error.response.data);
@@ -40,9 +40,9 @@ const Faucet = () => {
         <Box className="container-wrape">
             <ToastContainer />
             <Typography component="h6" align="center" className="title-text">
-                B4 Fire Testnet Faucet
+                SEM  Testnet Faucet
             </Typography>
-            <p style={{ color: "white", fontSize: " 1.5rem", textAlign: "center", textShadow: " 1px 1px 1px rgba(0, 0, 0, 0.5)" }}>Fast and reliable 1 B4Fire Testnet B4Fire/day.</p>
+            <p style={{ color: "white", fontSize: " 1.5rem", textAlign: "center", textShadow: " 1px 1px 1px rgba(0, 0, 0, 0.5)" }}>Fast and reliable 1 SEMTestnet SEM/day.</p>
 
             <Box className="d-flex justify-content-center">
                 <Box className="fauset-alert">
@@ -72,7 +72,7 @@ const Faucet = () => {
                                     type="submit"
                                     onClick={sendFaucet}
                                 >
-                                    Send me Fire
+                                    Send me 
                                 </Button>
                             </div>
 
@@ -89,15 +89,15 @@ const Faucet = () => {
                                 <h3 className="card-title mb-3">FAQs</h3>
                                 <div className="quis-sec">
                                     <h5>How do I use this?</h5>
-                                    <p>To request funds, simply enter your wallet address and hit “Send Me B4Fire”. We support wallets as received addresses but not smart contracts.</p>
+                                    <p>To request funds, simply enter your wallet address and hit “Send Me SEM”. We support wallets as received addresses but not smart contracts.</p>
                                 </div>
                                 <div className="quis-sec">
                                     <h5>How does it work?</h5>
-                                    <p>You can request 0.2 B4Fire Testnet B4Fire every 24h without any authentication. Then create a wallet Address to start building!</p>
+                                    <p>You can request 0.2 SEMTestnet SEMevery 24h without any authentication. Then create a wallet Address to start building!</p>
                                 </div>
                                 <div className="quis-sec">
                                     <h5>What is a testnet token?</h5>
-                                    <p>Testnet tokens are a test currency that allows you to test your B4Fire application before going live on mainnet. Testnet tokens can be used in place of mainnet B4Fire tokens on testnets like B4Fire.</p>
+                                    <p>Testnet tokens are a test currency that allows you to test your SEMapplication before going live on mainnet. Testnet tokens can be used in place of mainnet SEMtokens on testnets like SEM.</p>
                                 </div>
                             </div>
                         </div>

@@ -39,7 +39,7 @@ const ContractData: React.FC<MyComponentProps> = ({ address, isverified, contrac
   const fetchContractBytecode = async () => {
     try {
       // Connect to an Ethereum node (replace with your actual node URL)
-      const provider = new ethers.providers.JsonRpcProvider('http://localhost:9951');
+      const provider = new ethers.providers.JsonRpcProvider('https://sem-live.appworkdemo.com/archive');
 
       // Fetch the contract's bytecode using eth_getCode
       const bytecode = await provider.send('eth_getCode', [address, 'latest']);
@@ -133,7 +133,7 @@ const ContractData: React.FC<MyComponentProps> = ({ address, isverified, contrac
   const connectWallet = async () => {
     // const chainId = { mainnet: 137, testnet: 80001 }; // Polygon Mainnet
     // const chainId = { mainnet: 1, testnet: 11155111 }; // Sepolia
-    const chainId = { mainnet: 151530, testnet: 151530 }; // B4Hit
+    const chainId = { mainnet: 151530, testnet: 151530 }; // SEMHit
 
     const { ethereum }: any = window;
     // const chainId = { mainnet: 1, testnet: 5 }; // Goerli

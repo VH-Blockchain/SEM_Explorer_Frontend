@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import StatusCard from "../../status-card/StatusCard";
 import Chart, { ChartSeries } from "../../Chart/Chart";
@@ -51,7 +51,9 @@ const Home: React.FC = () => {
       number: number | string;
       txs: number | string;
       timeAt: string;
+      validateBy: string;
       bnbPrice: string;
+      gasUsed: number
     }>
   >([]);
 
@@ -67,6 +69,7 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalTx, setTotalTx] = useState<number>(0);
   const [lastPage, setLastPage] = useState<number>(0);
+  const navigate = useNavigate();
 
   const changePage = async (_page: number) => {
     const response = await axios.get(
@@ -144,13 +147,14 @@ const Home: React.FC = () => {
             (blck) => blck.number === block.number
           );
           if (blockExistsInTable) return prevBlocks;
-
           return [
             {
               number: block.number,
               txs: block.transactions.length,
               timeAt: timeAt,
+              validateBy: block.miner,
               bnbPrice: bnbPrice,
+              gasUsed: block.gasUsed
             },
             ...prevBlocks,
           ];
@@ -158,7 +162,6 @@ const Home: React.FC = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}internal/txs?page=${currentPage}&limit=${limit}`
         );
-        console.log(response, "response");
         setCurrentPage(response.data.data?.meta.current_page);
         setLimit(response.data.data?.meta?.per_page);
         setTotalTx(response.data.data?.meta?.total);
@@ -169,10 +172,11 @@ const Home: React.FC = () => {
           const newTransactions = response.data.data.transactions
             .filter((tx: any) => !prevHashes.includes(tx.hash))
             .map((tx: any) => {
+              console.log(tx, "tx");
               return {
                 hash: tx.transaction_hash,
                 from: tx.from,
-                to: tx.to,
+                to: tx.to !== null ? tx.to : (tx.creates !== null ? tx.creates : null),
                 value: (tx.value / 10 ** 18).toString(),
               };
             });
@@ -203,7 +207,9 @@ const Home: React.FC = () => {
             number: block.number,
             txs: block.transactions.length,
             timeAt: timeAt,
+            validateBy: block.miner,
             bnbPrice: bnbPrice,
+            gasUsed: block.gasUsed
           },
           ...prevBlocks,
         ];
@@ -212,10 +218,6 @@ const Home: React.FC = () => {
     const cardInfoHandler = setInterval(updateBlocks, 2500);
     return () => clearInterval(cardInfoHandler);
   }, []);
-
-  // for open handleChangedropdown
-
-  // for open handleChangedropdown
 
   const [selectedValue, setSelectedValue] = useState<string>("10"); // State for selected value
 
@@ -227,10 +229,10 @@ const Home: React.FC = () => {
     <div className="layout-inner-wrape">
       <section>
         <div className="top-title-sec">
-          <h3 className="top-title">SEM blockchain explorer</h3>
+          <h3 className="top-title">SEM Chain Explorer</h3>
           <div className="title-button-sec">
             <div className="btn-sec">
-              <Button className="refresh-btn">Refresh</Button>
+              <Button className="refresh-btn" onClick={() => { window.location.reload() }}>Refresh</Button>
 
             </div>
           </div>
@@ -289,17 +291,17 @@ const Home: React.FC = () => {
                               <tr key={tx.hash}>
                                 <td>
                                   <Link to={`tx/${tx.hash}`}>
-                                    {tx.hash.slice(0, 10) + "..."}
+                                    {tx.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}
                                   </Link>
                                 </td>
                                 <td>
                                   <Link to={`/address/${tx.from}`}>
-                                    {tx.from.slice(0, 20) + "..."}
+                                    {tx.from.slice(0, 8) + "..." + tx.from.slice(-4)}
                                   </Link>
                                 </td>
                                 <td>
                                   <Link to={`/address/${tx.to}`}>
-                                    {tx.to ? tx.to.slice(0, 20) + "..." : "-"}
+                                    {tx.to ? tx.to.slice(0, 8) + "..." + tx.to.slice(-4) : "-"}
                                   </Link>
                                 </td>
                                 <td>{tx.value}</td>
@@ -313,26 +315,13 @@ const Home: React.FC = () => {
                       {latestTransactions.length > 0 && (
                         <div className="table__pagination">
                           <h3>
-                            Page {currentPage} of {lastPage}
+
                           </h3>
                           <div className="btn-wrape">
-                            {limit * currentPage > limit && (
-                              <button
-                                className="btn"
-                                onClick={() => {
-                                  changePage(Number(currentPage) - 1);
-                                }}
-                              >
-                                <i className="bx bx-left-arrow-alt"></i> Back
-                              </button>
-                            )}
                             {true && (
                               <>
-                                <button className="btn" onClick={() => {
-                                  changePage(Number(currentPage) + 1)
-                                }}>Next <i className="bx bx-right-arrow-alt"></i></button>
+                                <button className="btn" onClick={() => navigate("/AllTransactions")}>View All Transactions</button>
                               </>
-                              // <button className="btn">View</button>
                             )}
                           </div>
                         </div>
@@ -353,7 +342,8 @@ const Home: React.FC = () => {
                               <th>Number</th>
                               <th>Tx Count</th>
                               <th>Time At</th>
-                              <th>B4Fire Price</th>
+                              <th>Validate By</th>
+                              <th>Gas Used</th>
                             </tr>
                           );
                         }}
@@ -368,7 +358,8 @@ const Home: React.FC = () => {
                                 </td>
                                 <td>{block.txs}</td>
                                 <td>{block.timeAt}</td>
-                                <td>NA</td>
+                                <td>{block.validateBy.slice(0, 8) + "..." + block.validateBy.slice(-4)}</td>
+                                <td>{block.gasUsed} SEM</td>
                               </tr>
                             );
                           };
@@ -376,6 +367,20 @@ const Home: React.FC = () => {
                         limit={10}
                         pagesLimit={5}
                       />
+                      {latestBlocks.length > 0 && (
+                        <div className="table__pagination">
+                          <h3>
+
+                          </h3>
+                          <div className="btn-wrape">
+                            {true && (
+                              <>
+                                <button className="btn" onClick={() => navigate("/Blocks")}>View All Blocks</button>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Grid>

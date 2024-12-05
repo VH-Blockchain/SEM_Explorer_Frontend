@@ -131,7 +131,7 @@ const VyperVerify = () => {
             vyper_type: "vyper:0.1.0b7"
         },
         {
-            vyper_type: "vyper:0.1.0b4"
+            vyper_type: "vyper:0.1.0SEM"
         },
 
     ]
@@ -310,10 +310,10 @@ const VyperVerify = () => {
                                 <Grid item lg={12} md={12} sm={12}>
                                     <Box className="sub-text-wrap">
                                         <Typography className='single-line' variant="h6">
-                                                For additional information on Constructor Arguments{" "}
-                                                <Link href="https://info.etherscan.com/contract-verification-constructor-arguments/">
-                                                    see KB Entry
-                                                </Link>
+                                            For additional information on Constructor Arguments{" "}
+                                            <Link href="https://info.etherscan.com/contract-verification-constructor-arguments/">
+                                                see KB Entry
+                                            </Link>
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -327,7 +327,7 @@ const VyperVerify = () => {
                         </Box>
 
 
-                        <Grid container spacing={3}  className="ABI_card">
+                        <Grid container spacing={3} className="ABI_card">
                             <Grid item lg={6} md={6} sm={6} xs={12}>
                                 <Box className="input-wrape">
                                     <FormControl>

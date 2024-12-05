@@ -48,15 +48,15 @@ export const getAddressInfo = async (address: string) => {
   const bnbPrice = await getPrice("BNB", "USDT").then((quote: any) =>
     Number(quote.price)
   );
-
+  const semPrice =1;
   const contract = await getCode(address);
   console.log(contract, "contract");
 
-  const balance = await getBalance(address).then((bal:any) =>
+  const balance = await getBalance(address).then((bal: any) =>
     Web3.utils.fromWei(bal, "ether")
   );
 
-  const balanceUsd = (Number(balance) * bnbPrice).toLocaleString();
+  const balanceUsd = (Number(balance) * semPrice).toLocaleString();
 
   const txCount = await getTransactionsCount(address);
   let tokenName: any;
@@ -64,11 +64,11 @@ export const getAddressInfo = async (address: string) => {
   let totalSupply: any;
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:9951"
+      "https://sem-live.appworkdemo.com/archive"
     );
 
     const contractTokenObject = new ethers.Contract(
-      "0xe3cfBF398E18eE56C03b2dB13C734D27A32AbeF0",
+      "0xe52306eE42fd827f662dDEb47785b89990F616D3",
       abi,
       provider
     );
@@ -100,6 +100,7 @@ export const getAddressDetails = async (
   limit: Number
 ): Promise<{ data: any }> => {
   const data = await getAddress(address, pageNo, limit);
+  console.log("addressData", data);
   return { data: data };
 };
 

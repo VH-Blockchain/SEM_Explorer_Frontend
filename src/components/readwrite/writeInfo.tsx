@@ -17,7 +17,7 @@ export interface writerfunc {
   address: any;
 }
 
-const WriteInfo = ({ name, parameters,abi, address }: writerfunc) => {
+const WriteInfo = ({ name, parameters, abi, address }: writerfunc) => {
   const [data, setData] = useState<{ [key: string]: string }>({});
   const [outputs, setOutputs] = useState("");
   const [open, setopen] = useState(false);
@@ -28,7 +28,7 @@ const WriteInfo = ({ name, parameters,abi, address }: writerfunc) => {
   const getInfo = async (name: string, showParameters: any) => {
     const { ethereum }: any = window;
     // const chainId = { mainnet: 1, testnet: 11155111 }; // sepolia
-    const chainId = { mainnet: 456789, testnet: 456789 }; // b4hit
+    const chainId = { mainnet: 456789, testnet: 456789 }; // SEMhit
     // let window:any
     try {
       if (ethereum.networkVersion !== chainId.testnet) {
@@ -110,50 +110,50 @@ const WriteInfo = ({ name, parameters,abi, address }: writerfunc) => {
             </button>
           </h2> */}
       <Accordion>
-      <AccordionSummary
-        // expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1-content"
-        id="panel1-header"
-        onClick={() => toggleParameters(name)}
-      >
-        {name}
-      </AccordionSummary>
-<AccordionDetails>
-      {parameters.length > 0 && open && (
-        <div className="accordion-body">
-          {parameters.map((item: { name: any }) => {
-            return (
-              <TextField
-                label={item?.name}
-                type="text"
-                variant="outlined"
-                key={item?.name}
-                id={name}
-                name={item?.name}
-                value={data[item?.name] || ""}
-                onChange={storevalues}
-                placeholder={item?.name}
-                sx={{ width: "30%", my: "5px", mx: "5px" }}
-              />
-            );
-          })}
+        <AccordionSummary
+          // expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+          onClick={() => toggleParameters(name)}
+        >
+          {name}
+        </AccordionSummary>
+        <AccordionDetails>
+          {parameters.length > 0 && open && (
+            <div className="accordion-body">
+              {parameters.map((item: { name: any }) => {
+                return (
+                  <TextField
+                    label={item?.name}
+                    type="text"
+                    variant="outlined"
+                    key={item?.name}
+                    id={name}
+                    name={item?.name}
+                    value={data[item?.name] || ""}
+                    onChange={storevalues}
+                    placeholder={item?.name}
+                    sx={{ width: "30%", my: "5px", mx: "5px" }}
+                  />
+                );
+              })}
 
-          {/* <button className="btn btn-primary"
+              {/* <button className="btn btn-primary"
               style={{ background: "#696969", color: "white", marginLeft: "5px" }}
               onClick={() => getInfo(name, { ...data })} >Write</button> */}
-          <Button
-            className=""
-            variant="contained"
-            type="submit"
-            size="small"
-            onClick={() => getInfo(name, { ...data })}
-          >
-            Write
-          </Button>
-        </div>
-      )}
-      {outputs === "" ? <h5>{outputs}</h5> : <h5>tx hash: {outputs}</h5>}
-      </AccordionDetails>
+              <Button
+                className=""
+                variant="contained"
+                type="submit"
+                size="small"
+                onClick={() => getInfo(name, { ...data })}
+              >
+                Write
+              </Button>
+            </div>
+          )}
+          {outputs === "" ? <h5>{outputs}</h5> : <h5>tx hash: {outputs}</h5>}
+        </AccordionDetails>
       </Accordion>
     </div>
     // </div>

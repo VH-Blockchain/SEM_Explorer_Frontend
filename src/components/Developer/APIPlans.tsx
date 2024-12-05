@@ -99,13 +99,13 @@ const APIPlans = () => {
     return (
         <Box className="container-wrape ">
             <Typography className="container-wrape title-text" variant="h4" component="h6" align="center" >
-                <b>Build Precise & Reliable Apps with B4Fire APIs</b>
+                <b>Build Precise & Reliable Apps with SEMAPIs</b>
             </Typography>
             <Box>
                 <div className="card-deck">
                     <div className="card">
                         <div className="card-body">
-                            <h5 className="card-title">Data from the leading B4Fire Smart Chain Block Explorer catered to your needs.</h5>
+                            <h5 className="card-title">Data from the leading SEMSmart Chain Block Explorer catered to your needs.</h5>
                             <div className="button-wrape plan-box">
                                 <Button
                                     className="btn btn-primary m-2 first-btn"
@@ -115,7 +115,7 @@ const APIPlans = () => {
                                 >
                                     API Pricing
                                 </Button>
-                                <a  href="https://paritas-organization.gitbook.io/b4fire/" target="_blank">
+                                <a href="https://paritas-organization.gitbook.io/SEM/" target="_blank">
                                     API Documentation
                                 </a>
                             </div>
@@ -180,7 +180,7 @@ const APIPlans = () => {
                                             aria-controls="panel1-content"
                                             id="panel1-header"
                                         >
-                                            <Typography>How do I subscribe to B4FireScan API services?</Typography>
+                                            <Typography>How do I subscribe to SEMScan API services?</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                             <Typography>
@@ -290,7 +290,7 @@ const APIPlans = () => {
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title plan-card">Contact Us</h5>
-                            <p className="plan-card">If you have any questions on the B4FireScan APIs, ask them here!</p>
+                            <p className="plan-card">If you have any questions on the SEMScan APIs, ask them here!</p>
 
                             <Box className="form-wrape address_card">
                                 <Grid container spacing={3}>
@@ -342,7 +342,7 @@ const APIPlans = () => {
                                 </Grid>
                             </Box>
 
-                           
+
 
                             <Box>
                                 <div className="button-wrape sendmessage-btn">

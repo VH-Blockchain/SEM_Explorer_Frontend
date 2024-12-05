@@ -2,10 +2,9 @@ import Web3 from "web3";
 import axios from "axios";
 import FormData from "form-data";
 
-export const RPC_ENDPOINT = "http://localhost:9951";
+export const RPC_ENDPOINT = "https://sem-live.appworkdemo.com/archive";
 const web3 = new Web3(RPC_ENDPOINT);
 
-console.log(web3, "web3");
 export const getLatestBlock = async () => web3.eth.getBlock("latest", true);
 
 export const getBlock = async (blockNumber: string | number) =>
@@ -102,14 +101,16 @@ export const checkContractVerified = async (
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_BASE_URL}apiauth/getVerifiedContract?apikey=${apiKey}&address=${address}`,
+    url: `${
+      process.env.REACT_APP_BASE_URL
+    }apiauth/getVerifiedContract?apikey=${"7bf546e4-c912-4d84-9fdd-5094cdbc2bbb"}&address=${address}`,
     data: data,
   };
 
   const res = await axios
     .request(config)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
+      console.log(JSON.stringify(response.data), "response verify Contracts");
       return response;
     })
     .catch((error) => {

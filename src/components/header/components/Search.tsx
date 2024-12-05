@@ -35,7 +35,7 @@ const Search: React.FC = () => {
             setSearchData(prevSearch => {
                 return { ...prevSearch, tokens };
             })
-        }).catch(_ => {});
+        }).catch(_ => { });
     }
 
     const search = async () => {
@@ -46,30 +46,30 @@ const Search: React.FC = () => {
         const isBlock = (!searchValue.startsWith('0x') && Number(searchValue) && Number(searchValue) > 0);
         const isTransaction = isTransactionHash(searchValue);
 
-const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //B4HIT
-// let provider = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com"); //sepolia
+        const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //SEMHIT
+        // let provider = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com"); //sepolia
 
         const isAddress = Web3.utils.isAddress(searchValue);
-        
+
 
         const contractObject = new ethers.Contract("0xb504F4EA0BCD1aA6cFC782A43fccD097C0Da52dD",
-        searchAddressABI,
-        provider);
+            searchAddressABI,
+            provider);
 
-      const result = await contractObject.checkAddress(searchValue);
-      console.log("Result: ", result,isAddress);
+        const result = await contractObject.checkAddress(searchValue);
+        console.log("Result: ", result, isAddress);
 
-        if (isTransaction){
+        if (isTransaction) {
             navigate(`/tx/${searchValue}`);
         }
-        else if (isBlock){
+        else if (isBlock) {
             navigate(`/block/${searchValue}`);
         }
-        else if (result === "User Account"){
-            navigate(`/address/${searchValue}`, {state:"USER"});
-        }else {
+        else if (result === "User Account") {
+            navigate(`/address/${searchValue}`, { state: "USER" });
+        } else {
             searchTokens(searchValue);
-            navigate(`/address/${searchValue}`, {state:"CONTRACT"});
+            navigate(`/address/${searchValue}`, { state: "CONTRACT" });
         }
     };
 
@@ -85,7 +85,7 @@ const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //
             if (!e || !("nodeType" in e)) {
                 throw new Error(`Node expected`);
             }
-        } 
+        }
         document.addEventListener('mousedown', (e) => {
             assertIsNode(e.target);
 
@@ -101,7 +101,7 @@ const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //
     return (
         <>
             <div className="header__search">
-                <input 
+                <input
                     type="text"
                     ref={searchInputRef}
                     placeholder='Search by Address/Txn Hash/Block/Token'
@@ -112,9 +112,9 @@ const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //
                         });
                     }}
                     value={searchData.value}
-                    
+
                 />
-                <i 
+                <i
                     className='bx bx-search'
                     onClick={search}
                 />
@@ -124,23 +124,23 @@ const provider = new ethers.providers.JsonRpcProvider("http:localhost:9951"); //
                     <div className="row">
                         {searchData.tokens.slice(0, 5).map(token => {
                             return (
-                                <div 
+                                <div
                                     key={token.address}
                                     className="col-12"
                                     onClick={() => {
-                                        setSearchData({value: "", tokens: []});
+                                        setSearchData({ value: "", tokens: [] });
                                         navigate(`/address/${token.address}`);
                                     }}
                                 >
                                     <div className="card">
                                         <div className="card__body">
-                                            <img 
+                                            <img
                                                 className="header__tokens-img"
                                                 src={token.logo || emptyToken}
                                                 alt='Token Logo'
                                             />
                                             <span className="header__tokens-symbol">{token.symbol}</span>
-                                            <span className="header__tokens-name">| {token.name}</span> 
+                                            <span className="header__tokens-name">| {token.name}</span>
                                         </div>
                                     </div>
                                 </div>

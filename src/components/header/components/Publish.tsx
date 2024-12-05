@@ -139,7 +139,7 @@ const Publish = () => {
 
         try {
             setLoading(true)
-            const response = await fetch('http://192.168.1.18:3038/apiauth/verify?apikey=Ffd0053d-4a7a-4d38-A0d2-E471d88cf6b3', {
+            const response = await fetch('http://localhost:3038/apiauth/verify?apikey=7bf546e4-c912-4d84-9fdd-5094cdbc2bbb', {
                 method: 'POST',
                 body: formData,
             });
@@ -245,17 +245,17 @@ const Publish = () => {
                                                         <Button className="browse-btn" >Browse</Button>
                                                     </Box>
                                                     <Box className='upload-file'>
-                                                <Button
-                                                    className='first-btn btn'
-                                                    onClick={() => {
-                                                        console.log(selectedFile, "selectfile");
-                                                    }}>
-                                                    Upload files
-                                                </Button>
-                                            </Box>
+                                                        <Button
+                                                            className='first-btn btn'
+                                                            onClick={() => {
+                                                                console.log(selectedFile, "selectfile");
+                                                            }}>
+                                                            Upload files
+                                                        </Button>
+                                                    </Box>
                                                 </Box>
                                             </Box>
-                                            
+
                                         </Box>
                                         {/* <Button className="browse-btn" >Browse File</Button> */}
                                     </Box>

@@ -37,13 +37,13 @@ const Layout: React.FC = () => {
                 params: [
                     {
                         chainId: '0x24FEA',
-                        chainName: 'B4Chain',
+                        chainName: 'SEMChain',
                         nativeCurrency: {
-                            name: 'B4Fire',
-                            symbol: 'B4FIRE',
+                            name: 'SEM',
+                            symbol: 'SEM',
                             decimals: 18,
                         },
-                        rpcUrls: ['http://localhost:9951'],
+                        rpcUrls: ['https://sem-live.appworkdemo.com/archive'],
                         blockExplorerUrls: ['https://testnet.bscscan.com/'],
                     },
                 ],
@@ -65,12 +65,12 @@ const Layout: React.FC = () => {
                         <Pages />
                         <div className="mic">
                             {/* <i className="mic-icon"></i> */}
-                            {/* <p>Add B4Fire Network</p> */}
+                            {/* <p>Add SEMNetwork</p> */}
                             <Button onClick={AddMetamask}><img src={walletone} alt="walletone" className='matamask-btn' /></Button>
                             <div className="mic-shadow"></div>
                         </div>
                         {/* <div className="matamask-btn-main">
-                            <p>Add B4Fire Network</p>
+                            <p>Add SEMNetwork</p>
                             <Button onClick={AddMetamask}><img src={walletone} alt="walletone" className='matamask-btn' /></Button>
                         </div> */}
                     </div>

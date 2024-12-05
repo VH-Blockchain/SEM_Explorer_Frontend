@@ -35,6 +35,8 @@ const Block: React.FC = () => {
         const fetchBlock = async () => {
             setLoading(true);
             await getBlockByNumber(blockNumber).then((blocks) => {
+
+                console.log(blocks,"blocks")
                 if (blocks.block?.number === blocks.latest.number) return setBlock(blocks.latest);
                 
                 const cooldouwn = calculateCooldown(blocks.latest.number, Number(blockNumber));
@@ -70,7 +72,7 @@ const Block: React.FC = () => {
     return (
         <>
             <Box className="container-wrape">
-                <Typography component="h6" className="title-text">
+                <Typography component="h6" className="title-text" style={{ color: "black" }}>
                     Transactions
                 </Typography>
                 <Grid container spacing={3}>
@@ -86,7 +88,6 @@ const Block: React.FC = () => {
                                     <p><span className='theme-color'>Timestamp: </span>{moment(Number(block.timestamp) * 1000).fromNow(true)} ago</p>
                                     <p><span className='theme-color'>Miner: </span><Link to={`/address/${block.miner}`}>{block.miner}</Link></p>
                                     <p><span className='theme-color'>Difficulty: </span>{block.difficulty}</p>
-                                    z
                                     <p><span className='theme-color'>Hash: </span>{block.hash}</p>
                                     <p><span className='theme-color'>Parent Hash: </span>{block.parentHash}</p>
                                     <p><span className='theme-color'>Sha3Uncles: </span>{block.sha3Uncles}</p>

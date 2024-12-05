@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { Typography, Box} from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ import './tx.scss';
 import Grid from '@mui/material/Grid';
 
 const Tx: React.FC = () => {
-    const {hash=""} = useParams();
+    const { hash = "" } = useParams();
 
     const [loading, setLoading] = useLoading(false);
     const [inputFunction, setInputFunction] = useState('');
@@ -44,12 +44,12 @@ const Tx: React.FC = () => {
                         setInputFunction(methodName);
                     });
                 })
-                .catch(_ => {});
+                .catch(_ => { });
 
             setLoading(false);
         };
         fetchTransaction();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hash]);
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const Tx: React.FC = () => {
         !transaction?.data ||
         !transaction.receipt
     ) return <NotFound message='Transaction Not Found' />
-    
+
     return (
         <>
             <Box className="container-wrape">
@@ -86,16 +86,16 @@ const Tx: React.FC = () => {
                                     <p><span className='theme-color'>Block: </span><Link to={`/block/${transaction.data.blockNumber}`}>{transaction.data.blockNumber}</Link></p>
                                     <p><span className='theme-color'>From: </span><Link to={`/address/${transaction.data.from}`}>{transaction.data.from}</Link></p>
                                     <p><span className='theme-color'>To: </span><Link to={`/address/${transaction.data.to}`}>{transaction.data.to}</Link></p>
-                                    <p><span className='theme-color'>Value: </span>{Web3.utils.fromWei(transaction.data.value, 'ether')} B4Fire</p>
-                                    <p><span className='theme-color'>Tx Fee: </span>{Web3.utils.fromWei((Number(transaction.receipt.gasUsed) * Number(transaction.data.gasPrice)).toString(), 'ether')} B4Fire</p>
-                                    <p><span className='theme-color'>Gas Price: </span>{Web3.utils.fromWei(transaction.data.gasPrice, 'gwei')}</p>
+                                    <p><span className='theme-color'>Value: </span>{Web3.utils.fromWei(transaction.data.value, 'ether')} SEM</p>
+                                    <p><span className='theme-color'>Tx Fee: </span>{Web3.utils.fromWei((Number(transaction.receipt.gasUsed) * Number(transaction.data.gasPrice)).toString(), 'ether')} SEM</p>
+                                    <p><span className='theme-color'>Gas Price: </span>{Web3.utils.fromWei(transaction.data.gasPrice, 'gwei')} Gwei</p>
                                     <p><span className='theme-color'>Gas Limit: </span>{transaction.data.gas}</p>
                                     <p><span className='theme-color'>Gas Used: </span>{transaction.receipt.gasUsed}</p>
                                     <p><span className='theme-color'>Nonce: </span>{transaction.data.nonce}</p>
                                     <p><span className='theme-color'>Input: </span>{transaction.data.input === '0x' ? 'Transfer' : inputFunction}</p>
                                 </div>
 
-                                
+
                                 <div className="tx-info-card">
                                     <p>{transaction.data.input}</p>
                                 </div>
@@ -106,7 +106,7 @@ const Tx: React.FC = () => {
 
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        { (transaction.receipt.logs.length || null) &&
+                        {(transaction.receipt.logs.length || null) &&
                             <div className="card">
                                 <div className="card__header">
                                     <h3>Logs: {transaction.receipt.logs.length}</h3>
@@ -116,7 +116,7 @@ const Tx: React.FC = () => {
                                         {transaction.receipt.logs.map((log, index) => {
                                             const signature = signatures.find(sig => sig.event === log.topics[0]);
                                             return (
-                                                <div 
+                                                <div
                                                     className="card col-12"
                                                     key={index}
                                                 >
@@ -126,13 +126,13 @@ const Tx: React.FC = () => {
                                                             <p><span className='theme-color'>Log Index:</span> {log.logIndex}</p>
                                                             <p><span className='theme-color'>Topics:</span> {signature?.name}</p>
                                                             <p>
-                                                            {log.topics.map((topic, topicIndex) => {
-                                                                return (
-                                                                    <div className="tx-info-card" key={topicIndex}>
-                                                                        [{topicIndex}] {topic}
-                                                                    </div>
-                                                                )
-                                                            })}
+                                                                {log.topics.map((topic, topicIndex) => {
+                                                                    return (
+                                                                        <div className="tx-info-card" key={topicIndex}>
+                                                                            [{topicIndex}] {topic}
+                                                                        </div>
+                                                                    )
+                                                                })}
                                                             </p>
                                                         </div>
                                                         <div className='tx-info'>
@@ -154,9 +154,9 @@ const Tx: React.FC = () => {
                     </Grid>
                 </Grid>
             </Box>
-            
+
             <div className="row">
-                { (transaction.receipt.logs.length || null) &&
+                {(transaction.receipt.logs.length || null) &&
                     <div className="col-12">
                         <div className="card">
                             <div className="card__header">
@@ -167,7 +167,7 @@ const Tx: React.FC = () => {
                                     {transaction.receipt.logs.map((log, index) => {
                                         const signature = signatures.find(sig => sig.event === log.topics[0]);
                                         return (
-                                            <div 
+                                            <div
                                                 className="card col-12"
                                                 key={index}
                                             >
@@ -177,21 +177,21 @@ const Tx: React.FC = () => {
                                                         <p><span className='theme-color'>Log Index:</span> {log.logIndex}</p>
                                                         <p><span className='theme-color'>Topics:</span> {signature?.name}</p>
                                                         <p>
-                                                        {log.topics.map((topic, topicIndex) => {
-                                                            return (
-                                                                <div className="tx-info-card" key={topicIndex}>
-                                                                    [{topicIndex}] {topic}
-                                                                </div>
-                                                            )
-                                                        })}
+                                                            {log.topics.map((topic, topicIndex) => {
+                                                                return (
+                                                                    <div className="tx-info-card" key={topicIndex}>
+                                                                        [{topicIndex}] {topic}
+                                                                    </div>
+                                                                )
+                                                            })}
                                                         </p>
                                                     </div>
                                                     <div className='tx-info'>
                                                         <p>Data: </p>
                                                         <p>
-                                                        <div className="tx-info-card">
-                                                            {log.data}
-                                                        </div>
+                                                            <div className="tx-info-card">
+                                                                {log.data}
+                                                            </div>
                                                         </p>
                                                     </div>
                                                 </div>

@@ -40,7 +40,7 @@
   --box-shadow-dark: rgba(0, 0, 0, 0.2) 0px 5px 10px;
 
   --main-color-blue: #349eff;
-  --second-color-blue: #62b4ff;
+  --second-color-blue: #62SEMff;
 
   --main-color-red: #fb0b12;
   --second-color-red: #ff4a6b;
@@ -51,8 +51,8 @@
   --main-color-green: #019707;
   --second-color-green: #4caf50;
 
-  --main-color-orange: #faa803;
-  --second-color-orange: #ffdb61;
+  --main-color-orange: #019707;
+  --second-color-orange: #4caf50;
 
   --sidebar-width: 50px;
   --border-radius: 8px;
@@ -78,7 +78,7 @@
   --text-disable-dark: rgb(219 219 219 / 38%);
   --text-disable: rgb(60 60 60 / 60%);
 
-  --title-text-color: #faa803;
+  --title-text-color: #5db64c;
   --link-text: #000000;
 
   --accr-base-color: #ffffff;
@@ -163,7 +163,7 @@ input {
         width: 25px;
         height: 2px;
         display: inline-block;
-        background: var(--main-color);
+        background: #5db64c;
       }
     }
   }
@@ -232,7 +232,7 @@ input {
 }
 
 .theme-color {
-  color: var(--second-color);
+  color: #5db64c;
 }
 
 button.btn,

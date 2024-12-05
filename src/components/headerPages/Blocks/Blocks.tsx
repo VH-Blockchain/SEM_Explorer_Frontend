@@ -13,6 +13,7 @@ const Blocks: React.FC = () => {
       txs: number | string;
       timeAt: string;
       bnbPrice: string;
+      gasUsed: number
     }>
   >([]);
 
@@ -37,6 +38,7 @@ const Blocks: React.FC = () => {
               txs: block.transactions.length,
               timeAt: timeAt,
               bnbPrice: bnbPrice,
+              gasUsed : block.gasUsed
             },
             ...prevBlocks,
           ];
@@ -64,7 +66,7 @@ const Blocks: React.FC = () => {
                 <th>Number</th>
                 <th>Tx Count</th>
                 <th>Time At</th>
-                <th>B4Fire Price</th>
+                <th>Gas Used</th>
               </tr>
             );
           }}
@@ -77,7 +79,7 @@ const Blocks: React.FC = () => {
                   </td>
                   <td>{block.txs}</td>
                   <td>{block.timeAt}</td>
-                  <td>NA</td>
+                  <td>{block.gasUsed} SEM</td>
                 </tr>
               );
             };

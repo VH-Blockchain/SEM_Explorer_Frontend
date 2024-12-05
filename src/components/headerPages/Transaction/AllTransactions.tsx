@@ -133,7 +133,7 @@ const AllTransactions: React.FC = () => {
                 <th>From</th>
                 <th>To</th>
                 <th>Value</th>
-                <th>GasPrice (B4fire)</th>
+                <th>GasPrice (SEM)</th>
               </tr>
             );
           }}

@@ -54,7 +54,7 @@ const Indexer = () => {
   useEffect(() => {
     console.log("object");
     const getprovider = () => {
-      let providercheck = new ethers.providers.JsonRpcProvider("http://localhost:9951"); //b4hit provider
+      let providercheck = new ethers.providers.JsonRpcProvider("https://sem-live.appworkdemo.com/archive"); //SEMhit provider
       // let providercheck = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com/");
       setprovider(providercheck);
     };
@@ -108,7 +108,7 @@ const Indexer = () => {
   const connectWallet = async () => {
     // const chainId = { mainnet: 137, testnet: 80001 }; // Polygon Mainnet
     //  const chainId = { mainnet: 1, testnet: 11155111 }; // Sepolia
-    const chainId = { mainnet: 151530, testnet: 151530 }; // B4Hit
+    const chainId = { mainnet: 151530, testnet: 151530 }; // SEMHit
 
     const { ethereum }: any = window;
     // const chainId = { mainnet: 1, testnet: 5 }; // Goerli

@@ -58,42 +58,45 @@ const AddressData: React.FC<MyComponentProps> = ({
 
   return (
     <>
-      <Box sx={{ marginBottom: "10px" }}>
-        <Button
-          className="btn btn-primary m-2 first-btn"
-          type="submit"
-          sx={{ marginRight: "10px" }}
-          onClick={changeTransferInfo}
-        >
-          Transactions
-        </Button>
-        {role === "USER" ? (
-          <></>
-        ) : (
-          <>
-            {" "}
-            {isverified ? (
-              <Badge color="success" overlap="circular" badgeContent=" ">
-                <Button
-                  type="reset"
-                  className="btn btn-primary reset-btn"
-                  onClick={changeContractInfo}
-                >
-                  Contract
-                </Button>
-              </Badge>
+      {contractData ?
+        (
+          <Box sx={{ marginBottom: "10px" }}>
+            <Button
+              className="btn btn-primary m-2 first-btn"
+              type="submit"
+              sx={{ marginRight: "10px" }}
+              onClick={changeTransferInfo}
+            >
+              Transactions
+            </Button>
+            {role === "USER" ? (
+              <></>
             ) : (
-              <Button
-                type="reset"
-                className="btn btn-primary reset-btn"
-                onClick={changeContractInfo}
-              >
-                Contract
-              </Button>
+              <>
+                {" "}
+                {isverified ? (
+                  <Badge color="success" overlap="circular" badgeContent=" ">
+                    <Button
+                      type="reset"
+                      className="btn btn-primary reset-btn"
+                      onClick={changeContractInfo}
+                    >
+                      Contract
+                    </Button>
+                  </Badge>
+                ) : (
+                  <Button
+                    type="reset"
+                    className="btn btn-primary reset-btn"
+                    onClick={changeContractInfo}
+                  >
+                    Contract
+                  </Button>
+                )}
+              </>
             )}
-          </>
-        )}
-      </Box>
+          </Box>) : (<div></div>)
+      }
 
       {transferData ? (
         <Grid container spacing={3}>
@@ -186,24 +189,24 @@ const AddressData: React.FC<MyComponentProps> = ({
                         </div> */}
             </div>
 
-                
-            {info.contract && info.contract !== "0x" && (
-              
-              <div className="">
-                  <div className="card address-info__card contract-code-title">
 
-                    <h1>
-                      <span className="theme-color">Contract Code:</span>
-                    </h1>
-                    {info.contract}
-                  </div>
+            {info.contract && info.contract !== "0x" && (
+
+              <div className="">
+                <div className="card address-info__card contract-code-title">
+
+                  <h1>
+                    <span className="theme-color">Contract Code:</span>
+                  </h1>
+                  {info.contract}
                 </div>
+              </div>
             )}
           </Grid>
         </Grid>
       ) : (
-        <ContractData address={address} isverified={isverified} contractData={metadata}/>
-        
+        <ContractData address={address} isverified={isverified} contractData={metadata} />
+
       )}
     </>
   );

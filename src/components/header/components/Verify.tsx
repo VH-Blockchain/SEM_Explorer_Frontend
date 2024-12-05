@@ -230,7 +230,7 @@ const Verify = () => {
         }, {
             version_type: "v0.5.11+commit.22be8592",
         }, {
-            version_type: "v0.5.11+commit.c082d0b4",
+            version_type: "v0.5.11+commit.c082d0SEM",
         }, {
             version_type: "v0.5.10+commit.5a6ea5b1",
         }, {
@@ -277,7 +277,7 @@ const Verify = () => {
             version_type: "v0.4.23+commit.124ca40d",
         },
         {
-            version_type: "v0.4.22+commit.4cb486ee",
+            version_type: "v0.4.22+commit.4cSEM86ee",
         },
         {
             version_type: "v0.4.21+commit.dfe3193c",
@@ -294,13 +294,13 @@ const Verify = () => {
         }, {
             version_type: "v0.4.16+commit.d7661dd9",
         }, {
-            version_type: "v0.4.15+commit.8b45bddb",
+            version_type: "v0.4.15+commit.8SEM5bddb",
         }, {
             version_type: "v0.4.15+commit.bbb8e64f",
         }, {
             version_type: "v0.4.14+commit.c2215d46",
         }, {
-            version_type: "v0.4.13+commit.0fb4cb1a",
+            version_type: "v0.4.13+commit.0fSEMcb1a",
         }, {
             version_type: "v0.4.12+commit.194ff033",
         }, {
@@ -430,7 +430,7 @@ const Verify = () => {
             vyper_type: "vyper:0.1.0b7"
         },
         {
-            vyper_type: "vyper:0.1.0b4"
+            vyper_type: "vyper:0.1.0SEM"
         },
 
 
@@ -451,12 +451,12 @@ const Verify = () => {
         setError(compilerVersion.trim() === '');
     };
 
-    const handleCompilerType = (event :any) =>{
+    const handleCompilerType = (event: any) => {
         setCompilertype(event.target.value);
         setError(compilertype.trim() === '');
     }
 
-    const data:any = {
+    const data: any = {
         textValue: textValue,
         compilerType: compilertype,
         compilerVersion: compilerVersion
@@ -470,9 +470,9 @@ const Verify = () => {
             setError(false);
             setAddressError(false);
             if (selectFile === "Soldity(Single File)") {
-                navigate("/pubilsh", {state: data});
+                navigate("/pubilsh", { state: data });
             } else if (selectFile === "Soldity(Multiple File)") {
-                navigate("/multiple-file", {state: data});
+                navigate("/multiple-file", { state: data });
             } else if (selectFile === "Solidity(Standard JSON-input)") {
                 navigate("/standardjsoninput")
             } else if (selectFile === "Vyper(Experimental)") {
@@ -490,7 +490,7 @@ const Verify = () => {
                 </Typography>
                 <Box className="inner-wrape">
                     <Box className="left-wrape">
-                        <Box className = "img_card">
+                        <Box className="img_card">
                             <img
                                 src="https://sepolia.etherscan.io/images/undraw/undraw_Security_on_s9ym.svg"
                                 className="card-img"
@@ -499,7 +499,7 @@ const Verify = () => {
                                 height="100"
                             />
                         </Box>
-                        
+
                         <Box className="content">
                             <Typography variant="h6" component="h6" align="center" >
                                 COMPILER TYPE AND VERSION SELECTION
@@ -517,7 +517,7 @@ const Verify = () => {
                         <Box className="form-wrape center-wrap">
                             <Grid container spacing={3}>
                                 <Grid item lg={12} md={6} sm={12}>
-                                    <Box className = "input-wrape">
+                                    <Box className="input-wrape">
                                         <FormControl>
                                             <Typography>
                                                 Please enter the Contract Address you would like to verify*
@@ -539,7 +539,7 @@ const Verify = () => {
                                 </Grid>
 
                                 <Grid item lg={12} md={6} sm={12}>
-                                    <Box className = "input-wrape">
+                                    <Box className="input-wrape">
                                         <FormControl >
                                             <Typography>
                                                 Please select Compiler Type
@@ -560,15 +560,15 @@ const Verify = () => {
                                 </Grid>
 
                                 {selectFile && (
-                                    <Grid item  lg={12} md={6} sm={12}>
-                                        <Box className = "input-wrape">
+                                    <Grid item lg={12} md={6} sm={12}>
+                                        <Box className="input-wrape">
                                             {selectFile !== 'Vyper(Experimental)' ? (
                                                 <FormControl >
                                                     <Typography >Please select Compiler Version</Typography>
                                                     <Select
                                                         value={compilerVersion}
                                                         onChange={handlecompiler}
-                                                        error = {error}
+                                                        error={error}
                                                     >
                                                         {compilerversion.map((ele, index) => (
                                                             <MenuItem key={index} value={ele.version_type}>
@@ -583,7 +583,7 @@ const Verify = () => {
                                                     <Select
                                                         value={compilerVersion}
                                                         onChange={handlecompiler}
-                                                        error ={error}
+                                                        error={error}
                                                     >
                                                         {vyperCompiler.map((ele, index) => (
                                                             <MenuItem key={index} value={ele.vyper_type}>
@@ -598,13 +598,13 @@ const Verify = () => {
                                 )}
 
                                 <Grid item lg={12} md={6} sm={12}>
-                                    <Box className = "input-wrape">
+                                    <Box className="input-wrape">
                                         <FormControl >
                                             <Typography>Please select Open Source License Type</Typography>
                                             <Select
                                                 value={compilertype}
                                                 onChange={handleCompilerType}
-                                                error = {error}
+                                                error={error}
                                             >
                                                 {compilerType.map((ele, index) => (
                                                     <MenuItem key={index} value={ele.compiler_type}>
@@ -617,7 +617,7 @@ const Verify = () => {
                                 </Grid>
                             </Grid>
                         </Box>
-                        
+
                         <Box className="other-control verify-other-control">
                             <FormControlLabel
                                 control={

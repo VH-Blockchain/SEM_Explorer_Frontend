@@ -87,7 +87,7 @@ const Address: React.FC = () => {
   }, [address]);
 
   useEffect(() => {
-    console.log("hello");
+    console.log("fetching... address details");
 
     fetchTransactions();
     if (location?.state === "USER") {
@@ -106,7 +106,6 @@ const Address: React.FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.hash, transactions, address, currentPage, rowsPerPage]);
-
   useEffect(() => {
     setTransactions({
       normal: [],
@@ -175,15 +174,15 @@ const Address: React.FC = () => {
   return (
     <section className="address-info">
       <div className="add-box">
-        <h2>
-          <span className="theme-color">Address:</span> {address}
+        <h2 style={{ color: "black" }}>
+          <span className="theme-color" style={{ color: "black" }}>Address:</span> {address}
         </h2>
         <Tooltip title="Copy">
-        <Button>
-        <img src={copy} alt="copy" className="copy-ic" />
-        </Button>
+          <Button>
+            <img src={copy} alt="copy" className="copy-ic" />
+          </Button>
         </Tooltip>
-      
+
       </div>
       <Grid container spacing={3}>
         <Grid item lg={8} md={12} sm={12} xs={12}>
@@ -196,8 +195,8 @@ const Address: React.FC = () => {
               </h2> */}
                   <p className="add-title">Overview</p>
                   <h2>
-                    <span className="theme-color">B4Fire Balance:</span>{" "}<br></br>
-                    {info.balance || "?"} B4Fire ({info.balanceUsd || "?"}$)
+                    <span className="theme-color">SEM Balance:</span>{" "}<br></br>
+                    {info.balance || "?"} SEM ({info.balanceUsd || "?"} $)
                   </h2>
                 </div>
               </div>
@@ -249,7 +248,7 @@ const Address: React.FC = () => {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <div className="card address-info__card powered-by">
             <div className="address-info__footer">
-              <p className="mb-0">Powered by B4FireScan APIs</p>
+              <p className="mb-0">Powered by SEMFireScan APIs</p>
             </div>
           </div>
         </Grid>

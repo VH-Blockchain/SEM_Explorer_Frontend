@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function footer() {
   return (
     <div className='footer-main'>
-      <p className='mb-0'>Copyright © 2024 B4chain | All Rights Reserved.</p>
+      <p className='mb-0'>Copyright © 2024 SEMchain | All Rights Reserved.</p>
       <div>
         <ul className='d-flex mb-0'>
           <li>Terms and conditions</li>
