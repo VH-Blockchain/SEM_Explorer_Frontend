@@ -80,24 +80,19 @@ const Address: React.FC = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    console.log(location.state, "Staterr")
     getAddressInfo(address).then((info) => setInfo(info));
-    console.log("getAddressInfo useEffect");
-
   }, [address]);
 
   useEffect(() => {
-    console.log("fetching... address details");
-
     fetchTransactions();
     if (location?.state === "USER") {
       getAddressDetails(address, currentPage, rowsPerPage).then((res: any) => {
+        console.log(res, "getAddressDetails")
         setaddressDataList(res.data.transactions);
       });
     } else {
       isContractVerified(address, process.env.REACT_APP_API_KEY as string)
         .then((res: any) => {
-          console.log(res?.data?.data.verified, "Res");
           setIsVerified(res?.data?.data.verified)
         })
         .catch((err: any) => {
@@ -141,11 +136,7 @@ const Address: React.FC = () => {
           !transactions.normal.find((offset) => offset.page === currentPage)
 
         ) {
-          console.log("If Condition Check");
-
           await getNormalTransactions(currentPage, address).then((txs) => {
-            console.log("getnormal Transaction Work");
-
             setTransactions((prevTransactions: any) => {
               console.log("set Transaction UseState");
 
@@ -190,9 +181,6 @@ const Address: React.FC = () => {
             <Grid item lg={6} md={12} sm={12} xs={12}>
               <div className="card balance-card">
                 <div className="address-info__card">
-                  {/* <h2>
-                <span className="theme-color">Address:</span> {address}
-              </h2> */}
                   <p className="add-title">Overview</p>
                   <h2>
                     <span className="theme-color">SEM Balance:</span>{" "}<br></br>
@@ -201,7 +189,7 @@ const Address: React.FC = () => {
                 </div>
               </div>
             </Grid>
-            <Grid item lg={6} md={12} sm={12} xs={12}>
+            {/* <Grid item lg={6} md={12} sm={12} xs={12}>
               <div className="card balance-card">
                 <div className="address-info__card">
                   <p className="add-title">Multichain Info</p>
@@ -210,12 +198,10 @@ const Address: React.FC = () => {
                   </h2>
                 </div>
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
         <Grid item lg={4} md={12} sm={12} xs={12}>
-          {/* <Grid spacing={3}>
-            <Grid item lg={12} md={12} sm={12} xs={12}> */}
           {
             location.state == "CONTRACT" ? (
               <Grid container spacing={3}>
@@ -236,23 +222,9 @@ const Address: React.FC = () => {
               </Grid>
             ) : (<></>)
           }
-          {/* </Grid>
-          </Grid> */}
         </Grid>
       </Grid>
-
-
       <AddressData transactions={transactions} location={location.hash} isverified={isverified} role={location.state} addressDataList={addressDataList && []} currentPage={currentPage} info={info} address={address} />
-
-      {/* <Grid container spacing={3}>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <div className="card address-info__card powered-by">
-            <div className="address-info__footer">
-              <p className="mb-0">Powered by SEMFireScan APIs</p>
-            </div>
-          </div>
-        </Grid>
-      </Grid> */}
     </section>
   );
 };

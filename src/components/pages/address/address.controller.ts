@@ -50,7 +50,6 @@ export const getAddressInfo = async (address: string) => {
   );
   const semPrice =1;
   const contract = await getCode(address);
-  console.log(contract, "contract");
 
   const balance = await getBalance(address).then((bal: any) =>
     Web3.utils.fromWei(bal, "ether")
@@ -77,7 +76,6 @@ export const getAddressInfo = async (address: string) => {
     const totals = await contractTokenObject.totalSupply();
     totalSupply = totals.toString();
   } catch (error) {
-    console.log("object", error);
     tokenName = " ";
     tokenSymbol = " ";
     totalSupply = " ";
@@ -100,7 +98,6 @@ export const getAddressDetails = async (
   limit: Number
 ): Promise<{ data: any }> => {
   const data = await getAddress(address, pageNo, limit);
-  console.log("addressData", data);
   return { data: data };
 };
 
@@ -109,7 +106,6 @@ export const isContractVerified = async (
   apiKey: string
 ): Promise<{}> => {
   const data = await checkContractVerified(address, apiKey);
-  console.log(data, "getapi");
 
   return { data: data };
 };

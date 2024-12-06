@@ -6,7 +6,16 @@ export const RPC_ENDPOINT = "https://sem-live.appworkdemo.com/archive";
 const web3 = new Web3(RPC_ENDPOINT);
 
 export const getLatestBlock = async () => web3.eth.getBlock("latest", true);
-
+export const getLatestBlocksFromDB = async () =>{
+  const apiCall = await axios
+    .get(
+      `${process.env.REACT_APP_BASE_URL}/internal//fetchBlocks`
+    )
+    .then((res) => {
+      return res.data.data;
+    });
+  return apiCall;
+}
 export const getBlock = async (blockNumber: string | number) =>
   web3.eth.getBlock(blockNumber, true);
 
@@ -88,6 +97,7 @@ export const getAddress = async (
       `${process.env.REACT_APP_BASE_URL}/internal/address/${address}?page=${pageNo}&limit=${limit}`
     )
     .then((res) => {
+      console.log(res, "res getAddress");
       return res.data.data;
     });
   return apiCall;
@@ -110,7 +120,7 @@ export const checkContractVerified = async (
   const res = await axios
     .request(config)
     .then((response) => {
-      console.log(JSON.stringify(response.data), "response verify Contracts");
+      // console.log(JSON.stringify(response.data), "response verify Contracts");
       return response;
     })
     .catch((error) => {

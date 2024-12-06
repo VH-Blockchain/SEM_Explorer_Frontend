@@ -50,7 +50,6 @@ const APIPlans = () => {
                     .then((result) => {
                         const information = JSON.parse(result).data;
                         if (information.length > 0) {
-                            console.log("informationgetvgh", information);
                             setApiKeyData(information);
                         }
                     })
@@ -74,7 +73,6 @@ const APIPlans = () => {
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log(result.data, "result");
                 setData(result.data);
                 return result.data;
             });

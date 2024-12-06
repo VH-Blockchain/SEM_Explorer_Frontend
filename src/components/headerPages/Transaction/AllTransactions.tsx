@@ -2,16 +2,15 @@ import Web3 from "web3";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Table from "../../table/Table";
-
+import moment from 'moment';
 import { getPrice } from "../../../services/binance";
 import {
   getLatestBlock
 } from "../../../services/web3";
-
-
 import "../../pages/home/home.scss";
 import axios from "axios";
 import { getTransactionDetailed } from "../../pages/tx/tx.controller."
+import { time, timeStamp } from "console";
 
 const AllTransactions: React.FC = () => {
   const [latestTransactions, setLatestTransactions] = useState<
@@ -22,16 +21,16 @@ const AllTransactions: React.FC = () => {
       to: string | null;
       value: string;
       gasPrice: number;
+      age: number | string;
     }>
   >([]);
   const [limit, setLimit] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalTx, setTotalTx] = useState<number>(0);
   const [lastPage, setLastPage] = useState<number>(0);
+  const [totalTx, setTotalTx] = useState<number>(0);
 
   const changePage = async (_page: number) => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/txs?page=${_page}&limit=${limit}`)
-    console.log(response.data.data.transactions, "response");
     setCurrentPage(response.data.data?.meta.current_page);
     setLimit(response.data.data?.meta?.per_page);
     setTotalTx(response.data.data?.meta?.total);
@@ -47,6 +46,7 @@ const AllTransactions: React.FC = () => {
             from: tx.from,
             to: tx.to,
             value: (tx.value / 10 ** 18).toString(),
+            age: tx.timestamp
           };
         });
       return [...newTransactions, ...prevTransactions];
@@ -56,7 +56,6 @@ const AllTransactions: React.FC = () => {
   useEffect(() => {
     const run = async () => {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/txs?page=${currentPage}&limit=${limit}`)
-      console.log(response.data.data.transactions, "response");
       setCurrentPage(response.data.data?.meta.current_page);
       setLimit(response.data.data?.meta?.per_page);
       setTotalTx(response.data.data?.meta?.total);
@@ -72,6 +71,7 @@ const AllTransactions: React.FC = () => {
               from: tx.from,
               to: tx.to,
               value: (tx.value / 10 ** 18).toString(),
+              age: tx.timestamp,
             };
           });
         return [...newTransactions, ...prevTransactions];
@@ -94,15 +94,41 @@ const AllTransactions: React.FC = () => {
           const newTransactions = response.data.data.transactions
             .filter((tx: any) => !prevHashes.includes(tx.hash))
             .map((tx: any) => {
+              let add;
+              const checkAddress = () => {
+                if (tx.to === "null") {
+                  return add = tx.creates
+                }
+                return add = tx.to
+              }
+              checkAddress()
+              function timeAgo(isoTimestamp: any) {
+                const now: any = new Date();
+                const timestamp: any = new Date(isoTimestamp);
+                const diffInSeconds = Math.floor((now - timestamp) / 1000);
 
+                if (diffInSeconds < 60) {
+                  return `${diffInSeconds} seconds ago`;
+                } else if (diffInSeconds < 3600) {
+                  const minutes = Math.floor(diffInSeconds / 60);
+                  return `${minutes} minutes ago`;
+                } else if (diffInSeconds < 86400) {
+                  const hours = Math.floor(diffInSeconds / 3600);
+                  return `${hours} hours ago`;
+                } else {
+                  const days = Math.floor(diffInSeconds / 86400);
+                  return `${days} days ago`;
+                }
+              }
               const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
               return {
                 hash: tx.transaction_hash,
                 blocknumber: tx.blockNumber,
                 from: tx.from,
-                to: tx.to,
+                to: add,
                 value: (tx.value / 10 ** 18).toString(),
-                gasPrice: gasInEther
+                gasPrice: gasInEther,
+                age: timeAgo(tx.timestamp)
               };
             });
           return [...newTransactions, ...prevTransactions];
@@ -113,9 +139,9 @@ const AllTransactions: React.FC = () => {
     };
 
     updateInfo();
-    const cardInfoHandler = setInterval(updateInfo, 2500);
+    // const cardInfoHandler = setInterval(updateInfo, 2500);
 
-    return () => clearInterval(cardInfoHandler);
+    // return () => clearInterval(cardInfoHandler);
   }, []);
 
   return (
@@ -128,11 +154,12 @@ const AllTransactions: React.FC = () => {
           thead={() => {
             return (
               <tr>
-                <th>Tx</th>
-                <th>Block Number</th>
+                <th>Transaction Hash</th>
+                <th>Block</th>
+                <th>Age</th>
                 <th>From</th>
                 <th>To</th>
-                <th>Value</th>
+                <th>Amount</th>
                 <th>GasPrice (SEM)</th>
               </tr>
             );
@@ -143,9 +170,10 @@ const AllTransactions: React.FC = () => {
                 <tr key={tx.hash}>
                   <td>
                     <Link to={`/tx/${tx.hash}`}>
-                      {tx.hash.slice(0, 10) + "..."}
+                      {tx.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}
                     </Link>
                   </td>
+                  <td>{tx.age}</td>
                   <td>
                     <Link to={`/block/${tx.blocknumber}`}>
                       {tx.blocknumber}
@@ -153,19 +181,19 @@ const AllTransactions: React.FC = () => {
                   </td>
                   <td>
                     <Link to={`/address/${tx.from}`}>
-                      {tx.from.slice(0, 20) + "..."}
+                      {tx.from.slice(0, 8) + "..." + tx.from.slice(-4)}
                     </Link>
                   </td>
                   <td>
                     {tx.to ? (
                       <Link to={`/address/${tx.to}`}>
-                        {tx.to.slice(0, 20) + "..."}
+                        {tx.to.slice(0, 8) + "..." + tx.to.slice(-4)}
                       </Link>
                     ) : (
                       "-"
                     )}
                   </td>
-                  <td>{tx.value}</td>
+                  <td>{tx.value} POL</td>
                   <td>{tx.gasPrice}</td>
                 </tr>
               );
@@ -175,7 +203,7 @@ const AllTransactions: React.FC = () => {
           pagesLimit={1000}
         />
         <>
-          {latestTransactions.length > 0 &&
+          {latestTransactions.length > 10 &&
             <div className="table__pagination">
               <h3>Page {currentPage} of {lastPage}</h3>
               <div className="btn-wrape">

@@ -172,11 +172,18 @@ const Home: React.FC = () => {
           const newTransactions = response.data.data.transactions
             .filter((tx: any) => !prevHashes.includes(tx.hash))
             .map((tx: any) => {
-              console.log(tx, "tx");
+              let add;
+              const checkAddress = () => {
+                if (tx.to === "null") {
+                  return add = tx.creates
+                }
+                return add = tx.to
+              }
+              checkAddress()
               return {
                 hash: tx.transaction_hash,
                 from: tx.from,
-                to: tx.to !== null ? tx.to : (tx.creates !== null ? tx.creates : null),
+                to: add,
                 value: (tx.value / 10 ** 18).toString(),
               };
             });
@@ -304,7 +311,7 @@ const Home: React.FC = () => {
                                     {tx.to ? tx.to.slice(0, 8) + "..." + tx.to.slice(-4) : "-"}
                                   </Link>
                                 </td>
-                                <td>{tx.value}</td>
+                                <td>{tx.value} SEM</td>
                               </tr>
                             );
                           };

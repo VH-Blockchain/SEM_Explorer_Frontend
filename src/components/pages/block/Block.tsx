@@ -11,7 +11,7 @@ import Loading from '../../loading/Loading';
 
 import { BlockTransactionsObject } from '../../../services/web3';
 import { getBlockByNumber, calculateCooldown } from './block.controller';
-import { Typography, Box} from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Grid from '@mui/material/Grid';
 
 
@@ -19,7 +19,7 @@ import './block.scss';
 
 
 const Block: React.FC = () => {
-    const {blockNumber=""} = useParams();
+    const { blockNumber = "" } = useParams();
 
     const isBlock = (
         !blockNumber.startsWith('0x') &&
@@ -36,9 +36,9 @@ const Block: React.FC = () => {
             setLoading(true);
             await getBlockByNumber(blockNumber).then((blocks) => {
 
-                console.log(blocks,"blocks")
+                console.log(blocks, "blocks")
                 if (blocks.block?.number === blocks.latest.number) return setBlock(blocks.latest);
-                
+
                 const cooldouwn = calculateCooldown(blocks.latest.number, Number(blockNumber));
                 setCooldown(cooldouwn ? new Date().getTime() + (cooldouwn * 1000) : null);
                 setBlock(blocks.block);
@@ -47,7 +47,7 @@ const Block: React.FC = () => {
             setLoading(false);
         };
         fetchBlock();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [blockNumber]);
 
     if (loading) return <Loading />
@@ -73,13 +73,13 @@ const Block: React.FC = () => {
         <>
             <Box className="container-wrape">
                 <Typography component="h6" className="title-text" style={{ color: "black" }}>
-                    Transactions
+                    Block Transactions
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                         <div className="card">
                             <div className="card__header">
-                                <h3>Detail of Transation:</h3>
+                                <h3>Detail of Block Transactions:</h3>
                             </div>
                             <div className="card__body">
                                 <div className='block-info'>
@@ -91,7 +91,7 @@ const Block: React.FC = () => {
                                     <p><span className='theme-color'>Hash: </span>{block.hash}</p>
                                     <p><span className='theme-color'>Parent Hash: </span>{block.parentHash}</p>
                                     <p><span className='theme-color'>Sha3Uncles: </span>{block.sha3Uncles}</p>
-                                    <p><span className='theme-color'>Nonce: </span>{block.nonce}</p>
+
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ const Block: React.FC = () => {
                                     thead={() => {
                                         return (
                                             <tr>
-                                                <th>Tx</th>
+                                                <th>Transaction Hash</th>
                                                 <th>From</th>
                                                 <th>To</th>
                                                 <th>Value</th>
@@ -115,10 +115,10 @@ const Block: React.FC = () => {
                                         return () => {
                                             return (
                                                 <tr key={tx.hash}>
-                                                    <td><Link to={`/tx/${tx.hash}`}>{tx.hash.slice(0, 10) + "..."}</Link></td>
-                                                    <td><Link to={`/address/${tx.from}`}>{tx.from.slice(0, 20) + "..."}</Link></td>
-                                                    <td><Link to={`/address/${tx.to}`}>{tx.to ? tx.to.slice(0, 20) + "..." : "-"}</Link></td>
-                                                    <td>{Web3.utils.fromWei(tx.value, 'ether')}</td>
+                                                    <td><Link to={`/tx/${tx.hash}`}>{tx.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}</Link></td>
+                                                    <td><Link to={`/address/${tx.from}`}>{tx.from.slice(0, 8) + "..." + tx.from.slice(-4)}</Link></td>
+                                                    <td><Link to={`/address/${tx.to}`}>{tx.to ? tx.to.slice(0, 8) + "..." + tx.to.slice(-4) : "-"}</Link></td>
+                                                    <td>{Web3.utils.fromWei(tx.value, 'ether')} SEM</td>
                                                 </tr>
                                             )
                                         }
@@ -131,7 +131,7 @@ const Block: React.FC = () => {
                 </Grid>
             </Box>
 
-            
+
         </>
     );
 };
