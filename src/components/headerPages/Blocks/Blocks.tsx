@@ -7,6 +7,7 @@ import { getLatestBlock, timestampToMinutes } from "../../../services/web3";
 import "../../pages/home/home.scss";
 import { time } from "console";
 import axios from "axios";
+import Pagination from "../../common/pagination/Pagination";
 
 const Blocks: React.FC = () => {
   const [latestBlocks, setLatestBlocks] = useState<
@@ -28,6 +29,7 @@ const Blocks: React.FC = () => {
   const [totalTx, setTotalTx] = useState<number>(0);
 
   const changePage = async (_page: number) => {
+    setLatestBlocks([])
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/fetchBlocks?page=${_page}&limit=${limit}`)
     setLastPage(response.data.data?.meta?.last_page);
     setCurrentPage(response.data.data?.meta.current_page);
@@ -131,7 +133,7 @@ const Blocks: React.FC = () => {
     // const cardInfoHandler = setInterval(updateInfo, 2500);
 
     // return () => clearInterval(cardInfoHandler);
-  }, []);
+  }, [currentPage, limit]);
 
   return (
     <div className="card">
@@ -173,7 +175,7 @@ const Blocks: React.FC = () => {
           limit={10}
           pagesLimit={5}
         />
-        {latestBlocks.length > 0 &&
+        {/* {latestBlocks.length > 0 &&
           <div className="table__pagination">
             <h3>Page {currentPage} of {lastPage}</h3>
             <div className="btn-wrape">
@@ -189,7 +191,13 @@ const Blocks: React.FC = () => {
               }
             </div>
           </div>
-        }
+        } */}
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          onPageChange={changePage}
+          limit={limit}
+        />
       </div>
     </div>
   );

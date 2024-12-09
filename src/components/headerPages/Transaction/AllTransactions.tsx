@@ -11,6 +11,7 @@ import "../../pages/home/home.scss";
 import axios from "axios";
 import { getTransactionDetailed } from "../../pages/tx/tx.controller."
 import { time, timeStamp } from "console";
+import Pagination from "../../common/pagination/Pagination";
 
 const AllTransactions: React.FC = () => {
   const [latestTransactions, setLatestTransactions] = useState<
@@ -24,12 +25,20 @@ const AllTransactions: React.FC = () => {
       age: number | string;
     }>
   >([]);
+  console.log(latestTransactions,"latestTransactions1313")
   const [limit, setLimit] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const rowsPerPage = 10;
+  const totalPages = Math.ceil(latestTransactions.length / rowsPerPage);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
   const [lastPage, setLastPage] = useState<number>(0);
   const [totalTx, setTotalTx] = useState<number>(0);
 
+
   const changePage = async (_page: number) => {
+    setLatestTransactions([])
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/txs?page=${_page}&limit=${limit}`)
     setCurrentPage(response.data.data?.meta.current_page);
     setLimit(response.data.data?.meta?.per_page);
@@ -202,7 +211,7 @@ const AllTransactions: React.FC = () => {
           limit={10}
           pagesLimit={1000}
         />
-        <>
+        {/* <>
           {latestTransactions.length > 10 &&
             <div className="table__pagination">
               <h3>Page {currentPage} of {lastPage}</h3>
@@ -220,7 +229,13 @@ const AllTransactions: React.FC = () => {
               </div>
             </div>
           }
-        </>
+        </> */}
+        <Pagination
+          currentPage={currentPage}
+          lastPage={lastPage}
+          onPageChange={changePage}
+          limit={limit}
+        />
       </div>
     </div>
 
