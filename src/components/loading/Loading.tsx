@@ -6,7 +6,7 @@ const Loading = () => {
             <div className="col-12">
                 <div className="card">
                     <div className="card__body">
-                        <h1>Loading...</h1>
+                        <h6>Loading...</h6>
                     </div>
                 </div>
             </div>

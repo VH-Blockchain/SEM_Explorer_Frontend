@@ -88,6 +88,24 @@ const AllTransactions: React.FC = () => {
     }
   }, []);
   useEffect(() => {
+    function timeAgo(isoTimestamp: any) {
+      const now: any = new Date();
+      const timestamp: any = new Date(isoTimestamp);
+      const diffInSeconds = Math.floor((now - timestamp) / 1000);
+
+      if (diffInSeconds < 60) {
+        return `${diffInSeconds} seconds ago`;
+      } else if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} minutes ago`;
+      } else if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} hours ago`;
+      } else {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days} days ago`;
+      }
+    }
     const updateInfo = async () => {
       const bnbPrice = await getPrice("BNB", "USDT").then(
         (quote) => Number(quote.price).toFixed(2) + "$"
@@ -111,24 +129,7 @@ const AllTransactions: React.FC = () => {
                 return add = tx.to
               }
               checkAddress()
-              function timeAgo(isoTimestamp: any) {
-                const now: any = new Date();
-                const timestamp: any = new Date(isoTimestamp);
-                const diffInSeconds = Math.floor((now - timestamp) / 1000);
-
-                if (diffInSeconds < 60) {
-                  return `${diffInSeconds} seconds ago`;
-                } else if (diffInSeconds < 3600) {
-                  const minutes = Math.floor(diffInSeconds / 60);
-                  return `${minutes} minutes ago`;
-                } else if (diffInSeconds < 86400) {
-                  const hours = Math.floor(diffInSeconds / 3600);
-                  return `${hours} hours ago`;
-                } else {
-                  const days = Math.floor(diffInSeconds / 86400);
-                  return `${days} days ago`;
-                }
-              }
+             
               const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
               return {
                 hash: tx.transaction_hash,

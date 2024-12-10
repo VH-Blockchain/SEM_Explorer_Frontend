@@ -37,7 +37,7 @@ const Pages = () => {
             <Route path="/vyper" element={ <VyperVerify />} />
             <Route path="/sign-in" element={ <Login />} />
             <Route path="/sign-up" element={ <Signup />} />
-            <Route path="/apiplans" element={ <Plans />} />Blocks
+            <Route path="/apiplans" element={ <Plans />} />
             <Route path="/AllTransactions" element={ <AllTransactions />} />
             <Route path="/Blocks" element={ <Blocks />} />
             <Route path={`/*`} element={ <NotFound message='Something went wrong' /> } />

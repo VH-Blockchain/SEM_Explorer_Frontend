@@ -53,7 +53,7 @@ const Home: React.FC = () => {
       timeAt: string;
       validateBy: string;
       bnbPrice: string;
-      gasUsed: number
+      gasUsed: number;
     }>
   >([]);
 
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
               timeAt: timeAt,
               validateBy: block.miner,
               bnbPrice: bnbPrice,
-              gasUsed: block.gasUsed
+              gasUsed: block.gasUsed,
             },
             ...prevBlocks,
           ];
@@ -175,11 +175,11 @@ const Home: React.FC = () => {
               let add;
               const checkAddress = () => {
                 if (tx.to === "null") {
-                  return add = tx.creates
+                  return (add = tx.creates);
                 }
-                return add = tx.to
-              }
-              checkAddress()
+                return (add = tx.to);
+              };
+              checkAddress();
               return {
                 hash: tx.transaction_hash,
                 from: tx.from,
@@ -216,7 +216,7 @@ const Home: React.FC = () => {
             timeAt: timeAt,
             validateBy: block.miner,
             bnbPrice: bnbPrice,
-            gasUsed: block.gasUsed
+            gasUsed: block.gasUsed,
           },
           ...prevBlocks,
         ];
@@ -234,20 +234,79 @@ const Home: React.FC = () => {
 
   return (
     <div className="layout-inner-wrape">
-      <section>
+      {/* <section>
         <div className="top-title-sec">
           <h3 className="top-title">SEM Chain Explorer</h3>
           <div className="title-button-sec">
             <div className="btn-sec">
-              <Button className="refresh-btn" onClick={() => { window.location.reload() }}>Refresh</Button>
-
+              <Button
+                className="refresh-btn"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                Refresh
+              </Button>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <div className="d-flex">
+        <section className="info w-40">
+          <Grid container spacing={3}>
+            <Grid item lg={12} md={12} xs={12}>
+              <div className="card  chart  chart-bg">
+                <Chart
+                  series={gasPriceChart.series}
+                  options={{
+                    colors: ["#6ab04c", "#2980b9", "yellow"],
+
+                    xaxis: {
+                      categories: gasPriceChart.timeAt,
+                    },
+                  }}
+                  height={"100%"}
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </section>
+        <section className="status-wrape status-bg w-60">
+          <Grid container spacing={3}>
+            <Grid item lg={3} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={"$1.0"}
+                // icon="bx bxs-dollar-circle"
+                title="SEM Price"
+              />
+            </Grid>
+            <Grid item lg={3} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={cardInfo.latestBlock}
+                // icon="bx bxs-data"
+                title="Latest Block"
+              />
+            </Grid>
+            <Grid item lg={3} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={cardInfo.blockTime}
+                // icon="bx bx-time"
+                title="Block Added"
+              />
+            </Grid>
+            <Grid item lg={3} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={cardInfo.txCount}
+                // icon="bx bx-transfer"
+                title="Tx Count"
+              />
+            </Grid>
+          </Grid>
+        </section>
+      </div>
       <section className="mt-30">
         <Grid container spacing={3}>
-          <Grid item lg={6} xs={12}>
+          <Grid item lg={12} xs={12}>
             <div className="card">
               {/* <div className="card__header">
                 <Button></Button>
@@ -255,19 +314,92 @@ const Home: React.FC = () => {
               <div className="card-header">
                 <div className="btn-sec">
                   <Button className="refresh-btn active">Refresh</Button>
-                  <Button className="refresh-btn" onClick={() => navigate("/AllTransactions")}>Transactions</Button>
-                  <Button className="refresh-btn">Network hashrate</Button>
-                  <Button className="refresh-btn">Token Price</Button>
-                  <Button className="refresh-btn">Total wallets</Button>
-                  <Button className="refresh-btn">arroe</Button>
+                  <Button
+                    className="refresh-btn"
+                    onClick={() => navigate("/AllTransactions")}
+                  >
+                    Transactions
+                  </Button>
+                  <Button
+                    className="refresh-btn"
+                    onClick={() => navigate("/AllTransactions")}
+                  >
+                    Blocks
+                  </Button>
+                  
+                  
+                  {/* <Button className="refresh-btn">Total wallets</Button> */}
+              
                 </div>
-                <div className="drop-sec">12d</div>
+                <div className="drop-sec"></div>
               </div>
               <div className="card__body api-key-table">
                 <div className="gradient-text-sec d-flex">
                   <h5 className="gradient-text">24,049,204</h5>
                   <span className="small-text">+1.23%</span>
                 </div>
+              </div>
+            </div>
+          </Grid>
+          <Grid item lg={6} xs={12}>
+            <div className="card">
+              <div className="card__header">
+                <h3 data-tooltip="test">Latest Blocks:</h3>
+              </div>
+              <div className="card__body api-key-table">
+                <Table
+                  thead={() => {
+                    return (
+                      <tr>
+                        <th>Number</th>
+                        <th>Tx Count</th>
+                        <th>Time At</th>
+                        <th>Validate By</th>
+                        <th>Gas Used</th>
+                      </tr>
+                    );
+                  }}
+                  tbody={latestBlocks.map((block) => {
+                    return () => {
+                      return (
+                        <tr key={block.number}>
+                          <td>
+                            <Link to={`/block/${block.number}`}>
+                              {block.number}
+                            </Link>
+                          </td>
+                          <td>{block.txs}</td>
+                          <td>{block.timeAt}</td>
+                          <td>
+                            {block.validateBy.slice(0, 8) +
+                              "..." +
+                              block.validateBy.slice(-4)}
+                          </td>
+                          <td>{block.gasUsed} SEM</td>
+                        </tr>
+                      );
+                    };
+                  })}
+                  limit={10}
+                  pagesLimit={5}
+                />
+                {latestBlocks.length > 0 && (
+                  <div className="table__pagination">
+                    <h3></h3>
+                    <div className="btn-wrape">
+                      {true && (
+                        <>
+                          <button
+                            className="btn"
+                            onClick={() => navigate("/Blocks")}
+                          >
+                            View All Blocks
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </Grid>
@@ -298,17 +430,25 @@ const Home: React.FC = () => {
                               <tr key={tx.hash}>
                                 <td>
                                   <Link to={`tx/${tx.hash}`}>
-                                    {tx.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}
+                                    {tx.hash.slice(0, 8) +
+                                      "..." +
+                                      tx.hash.slice(-4)}
                                   </Link>
                                 </td>
                                 <td>
                                   <Link to={`/address/${tx.from}`}>
-                                    {tx.from.slice(0, 8) + "..." + tx.from.slice(-4)}
+                                    {tx.from.slice(0, 8) +
+                                      "..." +
+                                      tx.from.slice(-4)}
                                   </Link>
                                 </td>
                                 <td>
                                   <Link to={`/address/${tx.to}`}>
-                                    {tx.to ? tx.to.slice(0, 8) + "..." + tx.to.slice(-4) : "-"}
+                                    {tx.to
+                                      ? tx.to.slice(0, 8) +
+                                        "..." +
+                                        tx.to.slice(-4)
+                                      : "-"}
                                   </Link>
                                 </td>
                                 <td>{tx.value} SEM</td>
@@ -321,68 +461,16 @@ const Home: React.FC = () => {
                       />
                       {latestTransactions.length > 0 && (
                         <div className="table__pagination">
-                          <h3>
-
-                          </h3>
+                          <h3></h3>
                           <div className="btn-wrape">
                             {true && (
                               <>
-                                <button className="btn" onClick={() => navigate("/AllTransactions")}>View All Transactions</button>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item lg={12} xs={12}>
-                  <div className="card">
-                    <div className="card__header">
-                      <h3 data-tooltip="test">Latest Blocks:</h3>
-                    </div>
-                    <div className="card__body api-key-table">
-                      <Table
-                        thead={() => {
-                          return (
-                            <tr>
-                              <th>Number</th>
-                              <th>Tx Count</th>
-                              <th>Time At</th>
-                              <th>Validate By</th>
-                              <th>Gas Used</th>
-                            </tr>
-                          );
-                        }}
-                        tbody={latestBlocks.map((block) => {
-                          return () => {
-                            return (
-                              <tr key={block.number}>
-                                <td>
-                                  <Link to={`/block/${block.number}`}>
-                                    {block.number}
-                                  </Link>
-                                </td>
-                                <td>{block.txs}</td>
-                                <td>{block.timeAt}</td>
-                                <td>{block.validateBy.slice(0, 8) + "..." + block.validateBy.slice(-4)}</td>
-                                <td>{block.gasUsed} SEM</td>
-                              </tr>
-                            );
-                          };
-                        })}
-                        limit={10}
-                        pagesLimit={5}
-                      />
-                      {latestBlocks.length > 0 && (
-                        <div className="table__pagination">
-                          <h3>
-
-                          </h3>
-                          <div className="btn-wrape">
-                            {true && (
-                              <>
-                                <button className="btn" onClick={() => navigate("/Blocks")}>View All Blocks</button>
+                                <button
+                                  className="btn"
+                                  onClick={() => navigate("/AllTransactions")}
+                                >
+                                  View All Transactions
+                                </button>
                               </>
                             )}
                           </div>
