@@ -109,7 +109,7 @@ const Header: React.FC = () => {
             aria-expanded={open2 ? "true" : undefined}
             onClick={() => navigate("/AllTransactions")}
           >
-            Transaction
+            Transactions
           </Button>
           {/* <Menu
             id="basic-menu"

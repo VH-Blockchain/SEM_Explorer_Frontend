@@ -156,7 +156,7 @@ const AllTransactions: React.FC = () => {
   return (
     <div className="card">
       <div className="card__header">
-        <h3>Latest Transactions:</h3>
+        <h3>Transactions</h3>
       </div>
       <div className="card__body api-key-table">
         <Table
@@ -164,8 +164,8 @@ const AllTransactions: React.FC = () => {
             return (
               <tr>
                 <th>Transaction Hash</th>
-                <th>Block</th>
                 <th>Age</th>
+                <th>Block</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Amount</th>
@@ -202,7 +202,7 @@ const AllTransactions: React.FC = () => {
                       "-"
                     )}
                   </td>
-                  <td>{tx.value} POL</td>
+                  <td>{tx.value} SEM</td>
                   <td>{tx.gasPrice}</td>
                 </tr>
               );

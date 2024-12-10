@@ -69,20 +69,20 @@ const Tx: React.FC = () => {
     return (
         <>
             <Box className="container-wrape">
-                <Typography component="h6" className="title-text">
+                {/* <Typography component="h6" className="title-text">
                     Transaction
-                </Typography>
+                </Typography> */}
 
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                         <div className="card">
                             <div className="card__header">
-                                <h3>Detail of Transation:</h3>
+                                <h3>Transaction Details</h3>
                             </div>
                             <div className="card__body">
                                 <div className='tx-info'>
                                     <p><span className='theme-color'>Hash: </span>{transaction.data.hash}</p>
-                                    <p><span className='theme-color'>Status: </span>{transaction.receipt.status.toString()}</p>
+                                    <p><span className='theme-color'>Status: </span>{transaction.receipt.status.toString() =="true" ? "Success": "Failed"}</p>
                                     <p><span className='theme-color'>Block: </span><Link to={`/block/${transaction.data.blockNumber}`}>{transaction.data.blockNumber}</Link></p>
                                     <p><span className='theme-color'>From: </span><Link to={`/address/${transaction.data.from}`}>{transaction.data.from}</Link></p>
                                     <p><span className='theme-color'>To: </span><Link to={`/address/${transaction.data.to}`}>{transaction.data.to}</Link></p>

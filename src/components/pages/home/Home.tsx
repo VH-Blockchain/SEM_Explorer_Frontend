@@ -255,7 +255,7 @@ const Home: React.FC = () => {
               <div className="card-header">
                 <div className="btn-sec">
                   <Button className="refresh-btn active">Refresh</Button>
-                  <Button className="refresh-btn">Transaction</Button>
+                  <Button className="refresh-btn" onClick={() => navigate("/AllTransactions")}>Transactions</Button>
                   <Button className="refresh-btn">Network hashrate</Button>
                   <Button className="refresh-btn">Token Price</Button>
                   <Button className="refresh-btn">Total wallets</Button>
