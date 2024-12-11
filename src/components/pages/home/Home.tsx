@@ -176,7 +176,7 @@ const Home: React.FC = () => {
             {
               number: block.number,
               txs: block.transactions.length,
-              timeAt: timeAgo(timeAt),
+              timeAt: (timeAt),
               validateBy: block.miner,
               bnbPrice: bnbPrice,
               gasUsed: block.gasUsed,
@@ -238,7 +238,7 @@ const Home: React.FC = () => {
           {
             number: block.number,
             txs: block.transactions.length,
-            timeAt: timeAgo(timeAt),
+            timeAt: (timeAt),
             validateBy: block.miner,
             bnbPrice: bnbPrice,
             gasUsed: block.gasUsed,
@@ -411,7 +411,7 @@ const Home: React.FC = () => {
                             </Link>
                           </td>
                           <td>{block.txs}</td>
-                          <td>{block.timeAt}</td>
+                          <td>{timeAgo(block.timeAt)}</td>
                           <td>
                             {block.validateBy.slice(0, 8) +
                               "..." +

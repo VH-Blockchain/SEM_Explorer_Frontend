@@ -383,7 +383,7 @@ const Header: React.FC = () => {
             }}
           >
             <MenuItem onClick={() => navigate('/plans')}>API Plans</MenuItem>
-            <MenuItem><a href="https://paritas-organization.gitbook.io/b4fire/" target="_blank">
+            <MenuItem><a href="https://paritas-organization.gitbook.io/sem/" target="_blank">
               API Documentation
             </a></MenuItem>
           </Menu>
@@ -400,7 +400,7 @@ const Header: React.FC = () => {
         ) : (
           <>
 
-            <li>
+            {/* <li>
               <Button
                 className="nav-items"
                 id="basic-button"
@@ -420,10 +420,10 @@ const Header: React.FC = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>B4Fire Testnet</MenuItem>
-                <MenuItem onClick={handleClose}>B4Fire Mainnet</MenuItem>
+                <MenuItem onClick={handleClose}>SEM Testnet</MenuItem>
+                <MenuItem onClick={handleClose}>B4FSEMire Mainnet</MenuItem>
               </Menu>
-            </li>
+            </li> */}
             <li>
               <Button
                 id="basic-button"
