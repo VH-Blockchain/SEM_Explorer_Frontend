@@ -286,7 +286,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section> */}
-      <div className="d-flex">
+      <div className="d-flex align-center">
         <section className="info w-40">
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} xs={12}>
