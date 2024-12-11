@@ -30,7 +30,7 @@ const Pages = () => {
            
             <Route path="/readwrite" element={<Indexer/>} />
             <Route path="/address/:address" element={ <AddressComp />} />
-            <Route path="/tx/:hash" element={ <Tx />} />
+            <Route path="/tx/:hash" element={ <Home />} />
             <Route path="/block/:blockNumber" element={ <Block />} />
             <Route path="/verify" element={ <Verify />} />
             <Route path="/pubilsh" element={ <Publish />} />
