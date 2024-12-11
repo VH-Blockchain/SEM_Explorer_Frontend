@@ -368,13 +368,13 @@ const Home: React.FC = () => {
                   <Button className="refresh-btn active">Refresh</Button>
                   <Button
                     className="refresh-btn"
-                    onClick={() => navigate("/AllTransactions")}
+                    onClick={() => navigate("/txs")}
                   >
                     Transactions
                   </Button>
                   <Button
                     className="refresh-btn"
-                    onClick={() => navigate("/AllTransactions")}
+                    onClick={() => navigate("/blocks")}
                   >
                     Blocks
                   </Button>
