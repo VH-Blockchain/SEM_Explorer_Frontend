@@ -40,8 +40,8 @@ const Pages = () => {
             <Route path="/sign-in" element={ <Login />} />
             <Route path="/sign-up" element={ <Signup />} />
             <Route path="/apiplans" element={ <Plans />} />
-            <Route path="/AllTransactions" element={ <AllTransactions />} />
-            <Route path="/Blocks" element={ <Blocks />} />
+            <Route path="/txs" element={ <AllTransactions />} />
+            <Route path="/blocks" element={ <Blocks />} />
             <Route path={`/*`} element={ <NotFound message='Something went wrong' /> } />
             <Route path="/plans" element={<APIPlans/>} />
             <Route path="/payment" element={<PaymentGateWay/>} />

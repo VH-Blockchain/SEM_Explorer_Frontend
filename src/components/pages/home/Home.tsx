@@ -444,7 +444,7 @@ const Home: React.FC = () => {
                         <>
                           <button
                             className="btn"
-                            onClick={() => navigate("/Blocks")}
+                            onClick={() => navigate("/blocks")}
                           >
                             View All Blocks
                           </button>
@@ -520,7 +520,7 @@ const Home: React.FC = () => {
                               <>
                                 <button
                                   className="btn"
-                                  onClick={() => navigate("/AllTransactions")}
+                                  onClick={() => navigate("/txs")}
                                 >
                                   View All Transactions
                                 </button>

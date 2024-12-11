@@ -133,6 +133,7 @@ const Blocks: React.FC = () => {
 
     const updateTables = async () => {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/fetchBlocks?page=${currentPage}&limit=${limit}`)
+      console.log(response);
       setLastPage(response.data.data?.meta?.last_page);
       setCurrentPage(response.data.data?.meta.current_page);
       setLimit(response.data.data?.meta?.per_page);

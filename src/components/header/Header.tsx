@@ -97,7 +97,7 @@
 //           >
 //             <MenuItem onClick={() => navigate("/AllTransactions")}>Transactions</MenuItem>
 //             <MenuItem onClick={handleClose}>Pending Transactions</MenuItem>
-//             <MenuItem onClick={() => navigate("/Blocks")}>View Blocks</MenuItem>
+//             <MenuItem onClick={() => navigate("/blocks")}>View Blocks</MenuItem>
 //           </Menu> */}
 //         </li>
 //         <li>
@@ -333,9 +333,9 @@ const Header: React.FC = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={() => navigate("/AllTransactions")}>Transactions</MenuItem>
+            <MenuItem onClick={() => navigate("/txs")}>Transactions</MenuItem>
             {/* <MenuItem onClick={handleClose}>Pending Transactions</MenuItem> */}
-            <MenuItem onClick={() => navigate("/Blocks")}>View Blocks</MenuItem>
+            <MenuItem onClick={() => navigate("/blocks")}>View Blocks</MenuItem>
           </Menu>
         </li>
         <li>
@@ -392,15 +392,7 @@ const Header: React.FC = () => {
         <li>
           <Button className="nav-items" onClick={() => navigate("/faucet")}>Faucet</Button>
         </li>
-
-        {!token ? (
-          <li>
-            <Button className="nav-items" onClick={() => navigate("/sign-in")}>Sign In</Button>
-          </li>
-        ) : (
-          <>
-
-            {/* <li>
+        <li>
               <Button
                 className="nav-items"
                 id="basic-button"
@@ -421,9 +413,17 @@ const Header: React.FC = () => {
                 }}
               >
                 <MenuItem onClick={handleClose}>SEM Testnet</MenuItem>
-                <MenuItem onClick={handleClose}>B4FSEMire Mainnet</MenuItem>
+                <MenuItem onClick={handleClose}>SEM Mainnet</MenuItem>
               </Menu>
-            </li> */}
+            </li>
+        {!token ? (
+          <li>
+            <Button className="nav-items" onClick={() => navigate("/sign-in")}>Sign In</Button>
+          </li>
+        ) : (
+          <>
+
+          
             <li>
               <Button
                 id="basic-button"
