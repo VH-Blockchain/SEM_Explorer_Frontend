@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useTypedSelector, useTypedDispatch } from "../../hooks/typed";
 
 import { selectThemes, setMode, setColor } from "../../store/themes/themes.slice";
@@ -44,7 +44,7 @@ const Layout: React.FC = () => {
                             decimals: 18,
                         },
                         rpcUrls: ['https://sem-live.appworkdemo.com/archive'],
-                        blockExplorerUrls: ['https://testnet.bscscan.com/'],
+                        blockExplorerUrls: ['https://scan.semchain.org/'],
                     },
                 ],
             });
