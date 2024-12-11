@@ -156,7 +156,7 @@
         transform: translate(-50%, -50%);
         border-radius: 100%;
         z-index: 2;
-        box-shadow: 0 0 10px 10px #04eaee;
+        box-shadow: 0 0 10px 10px #6dbc6f;
         // box-shadow: 0 0 10px 10px #1c084f;
     }
 
@@ -170,7 +170,7 @@
     &::after {
         width: 30px;
         height: 30px;
-        background-color: #229b9d;
+        background-color: #478b49;
         // background-color: #2f1e5f;
         animation: circle-size 0.8s linear infinite alternate;
     }
