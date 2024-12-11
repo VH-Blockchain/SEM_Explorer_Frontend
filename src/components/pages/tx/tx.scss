@@ -7,6 +7,9 @@
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
+    .br-bottom{
+        border-bottom: 1px solid #e0e0e0;
+    }
 }
 .tx-info > p, tx-events > p {
     padding: 10px 10px 10px;
@@ -17,8 +20,9 @@
     font-size: 14px;
     line-height: 1.5;
     // border-right: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    // border-bottom: 1px solid #e0e0e0;
     margin-bottom: 0;
+    align-items: center;
     a:hover{
         color: var(--second-color);
     }
@@ -30,6 +34,11 @@
         color: var(--lable-bold-color);
         font-weight: 500;
         font-size: 15px;
+    }
+    svg{
+        width: 16px;
+        height: 16px;
+        margin: 3px 10px 0 0;
     }
 }
 
