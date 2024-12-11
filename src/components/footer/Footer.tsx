@@ -13,5 +13,6 @@ export default function footer() {
         </ul>
       </div>
     </div>
+   
   )
 }
