@@ -50,11 +50,14 @@ const AllTransactions: React.FC = () => {
       const newTransactions = response.data.data.transactions
         .filter((tx: any) => !prevHashes.includes(tx.hash))
         .map((tx: any) => {
+          const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
           return {
             hash: tx.transaction_hash,
+            blocknumber: tx.blockNumber,
             from: tx.from,
             to: tx.to,
             value: (tx.value / 10 ** 18).toString(),
+            gasPrice: gasInEther,
             age: tx.timestamp
           };
         });
@@ -75,11 +78,14 @@ const AllTransactions: React.FC = () => {
         const newTransactions = response.data.data.transactions
           .filter((tx: any) => !prevHashes.includes(tx.hash))
           .map((tx: any) => {
+            const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
             return {
               hash: tx.transaction_hash,
+              blocknumber: tx.blockNumber,
               from: tx.from,
               to: tx.to,
               value: (tx.value / 10 ** 18).toString(),
+              gasPrice: gasInEther,
               age: tx.timestamp,
             };
           });
@@ -129,7 +135,7 @@ const AllTransactions: React.FC = () => {
                 return add = tx.to
               }
               checkAddress()
-             
+
               const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
               return {
                 hash: tx.transaction_hash,

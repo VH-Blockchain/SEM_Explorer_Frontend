@@ -30,6 +30,24 @@ const Blocks: React.FC = () => {
 
   const changePage = async (_page: number) => {
     setLatestBlocks([])
+    function timeAgo(isoTimestamp: any) {
+      const now: any = new Date();
+      const timestamp: any = new Date(isoTimestamp);
+      const diffInSeconds = Math.floor((now - timestamp) / 1000);
+
+      if (diffInSeconds < 60) {
+        return `${diffInSeconds} seconds ago`;
+      } else if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} minutes ago`;
+      } else if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} hours ago`;
+      } else {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days} days ago`;
+      }
+    }
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/fetchBlocks?page=${_page}&limit=${limit}`)
     setLastPage(response.data.data?.meta?.last_page);
     setCurrentPage(response.data.data?.meta.current_page);
@@ -53,7 +71,7 @@ const Blocks: React.FC = () => {
           return {
             number: tx.number,
             txs: tx.totaltransactions,
-            timeAt: timeAt(tx.timestamp),
+            timeAt: timeAgo(tx.timestamp),
             bnbPrice: gasInEther,
             gasUsed: tx.gasUsed,
             validator: tx.miner,
@@ -93,6 +111,25 @@ const Blocks: React.FC = () => {
     //   };
     //   updateTables();
     // };
+    function timeAgo(isoTimestamp: any) {
+      const now: any = new Date();
+      const timestamp: any = new Date(isoTimestamp);
+      const diffInSeconds = Math.floor((now - timestamp) / 1000);
+
+      if (diffInSeconds < 60) {
+        return `${diffInSeconds} seconds ago`;
+      } else if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} minutes ago`;
+      } else if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} hours ago`;
+      } else {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days} days ago`;
+      }
+    }
+
     const updateTables = async () => {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/fetchBlocks?page=${currentPage}&limit=${limit}`)
       setLastPage(response.data.data?.meta?.last_page);
@@ -117,7 +154,7 @@ const Blocks: React.FC = () => {
             return {
               number: tx.number,
               txs: tx.totaltransactions,
-              timeAt: timeAt(tx.timestamp),
+              timeAt: timeAgo(tx.timestamp),
               bnbPrice: gasInEther,
               gasUsed: tx.gasUsed,
               validator: tx.miner,
