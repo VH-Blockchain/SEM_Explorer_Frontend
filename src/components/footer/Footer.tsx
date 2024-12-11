@@ -9,7 +9,7 @@ export default function footer() {
       <div>
         <ul className='d-flex mb-0'>
           <li>Terms and conditions</li>
-          <li>Privacy policy</li>
+          <li><Link to={"privacy-policy"}>Privacy policy</Link></li>
         </ul>
       </div>
     </div>

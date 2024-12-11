@@ -36,10 +36,13 @@
     }
     
     tbody > tr:hover {
-        background-color: #5db64c;
+        //background-color: #5db64c;
+        background-image: linear-gradient(321deg, rgba(86, 175, 130, 0.7215686275), #5db64c);
+        background-image: linear-gradient(-108deg, #5db64c, #115d37);
         color: var(--txt-white);
+       
         cursor: pointer;
-        a {
+        a{
             color: var(--txt-white);
         }
     }
@@ -47,6 +50,20 @@
         td {
             // border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
+        td:first-child{
+            border-radius: 5px 0 0 5px;
+            -webkit-border-radius: 5px 0 0 5px;
+            -moz-border-radius: 5px 0 0 5px;
+            -ms-border-radius: 5px 0 0 5px;
+            -o-border-radius: 5px 0 0 5px;
+        }
+        td:last-child{
+            border-radius: 0 5px 5px 0;
+            -webkit-border-radius: 0 5px 5px 0;
+            -moz-border-radius: 0 5px 5px 0;
+            -ms-border-radius: 0 5px 5px 0;
+            -o-border-radius: 0 5px 5px 0;
+}
     }
 }
 

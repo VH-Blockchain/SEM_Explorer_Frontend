@@ -21,6 +21,8 @@ import APIPlans from "./Developer/APIPlans";
 import PaymentGateWay from "./Developer/PaymentGateWay";
 import ComingSoon from "./header/ComingSoon";
 import Faucet from "./headerPages/Faucet/Faucet";
+import Privacypolicy from "./pages/privacyPolicy/Privacypolicy";
+import Supply from "./pages/supply/Supply";
 
 const Pages = () => {
     return (
@@ -45,6 +47,8 @@ const Pages = () => {
             <Route path="/payment" element={<PaymentGateWay/>} />
             <Route path="/comingsoon" element={<ComingSoon/>} />
             <Route path="/faucet" element={<Faucet/>}/>
+            <Route path="/privacy-policy" element={<Privacypolicy/>}/>
+            <Route path="/supply" element={<Supply/>}/>
         </Routes>
     )
 };

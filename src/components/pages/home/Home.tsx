@@ -298,32 +298,49 @@ const Home: React.FC = () => {
         </section>
         <section className="status-wrape status-bg w-60">
           <Grid container spacing={3}>
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
                 count={"$1.0"}
                 // icon="bx bxs-dollar-circle"
                 title="SEM Price"
               />
             </Grid>
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
                 count={cardInfo.latestBlock}
                 // icon="bx bxs-data"
                 title="Latest Block"
               />
             </Grid>
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
                 count={cardInfo.blockTime}
                 // icon="bx bx-time"
                 title="Block Added"
               />
             </Grid>
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            
+          </Grid>
+          <Grid container spacing={3}>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
                 count={cardInfo.txCount}
                 // icon="bx bx-transfer"
                 title="Tx Count"
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={cardInfo.latestBlock}
+                // icon="bx bxs-data"
+                title="Latest Block"
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
+              <StatusCard
+                count={cardInfo.blockTime}
+                // icon="bx bx-time"
+                title="Block Added"
               />
             </Grid>
           </Grid>
