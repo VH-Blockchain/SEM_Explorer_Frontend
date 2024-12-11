@@ -25,6 +25,8 @@ import {
   Select,
 } from "@mui/material";
 import { MenuItem } from "react-pro-sidebar";
+import Web3 from "web3";
+import { CatchingPokemonSharp } from "@mui/icons-material";
 
 const Home: React.FC = () => {
   const [cardInfo, setCardInfo] = useState({
@@ -32,6 +34,7 @@ const Home: React.FC = () => {
     latestBlock: "?",
     txCount: "?",
     blockTime: "?",
+    gasUsed: "?"
   });
 
   const [gasPriceChart, setGasPriceChart] = useState<{
@@ -54,6 +57,8 @@ const Home: React.FC = () => {
       validateBy: string;
       bnbPrice: string;
       gasUsed: number;
+      baseFeePerGas: number
+
     }>
   >([]);
 
@@ -97,11 +102,11 @@ const Home: React.FC = () => {
     });
   };
   const timeAgo = (timeAt: string) => {
- 
+
     const now: any = new Date();
     const [hours, minutes, seconds] = timeAt.split(':').map((part) => parseInt(part, 10));
 
-    const time:any = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, seconds);
+    const time: any = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, seconds);
 
     const diffInSeconds = Math.floor((now - time) / 1000);
 
@@ -125,10 +130,10 @@ const Home: React.FC = () => {
         (quote) => Number(quote.price).toFixed(2) + "$"
       );
       const block = await getLatestBlock();
-      console.log(block,"12321")
+      console.log(block, "12321")
       const gas = calculateGas(block);
       const timeAt = timestampToMinutes(block);
-      console.log(timeAt,"timeAt")
+      console.log(timeAt, "timeAt")
 
       const updateChart = () => {
         setGasPriceChart((prevGasPriceChart) => {
@@ -162,6 +167,7 @@ const Home: React.FC = () => {
           latestBlock: block.number.toString(),
           txCount: block.transactions.length.toString(),
           blockTime: timeAt,
+          gasUsed: block.gasUsed.toString()
         });
       };
 
@@ -172,6 +178,7 @@ const Home: React.FC = () => {
           );
 
           if (blockExistsInTable) return prevBlocks;
+          console.log(block)
           return [
             {
               number: block.number,
@@ -180,6 +187,7 @@ const Home: React.FC = () => {
               validateBy: block.miner,
               bnbPrice: bnbPrice,
               gasUsed: block.gasUsed,
+              baseFeePerGas: 0.5
             },
             ...prevBlocks,
           ];
@@ -228,6 +236,7 @@ const Home: React.FC = () => {
       const bnbPrice = await getPrice("BNB", "USDT").then(
         (quote) => Number(quote.price).toFixed(2) + "$"
       );
+      console.log("lasteblock", block);
       setLatestBlocks((prevBlocks) => {
         const blockExistsInTable = prevBlocks.find(
           (blck) => blck.number === block.number
@@ -242,6 +251,7 @@ const Home: React.FC = () => {
             validateBy: block.miner,
             bnbPrice: bnbPrice,
             gasUsed: block.gasUsed,
+            baseFeePerGas: 0.5
           },
           ...prevBlocks,
         ];
@@ -319,10 +329,10 @@ const Home: React.FC = () => {
                 title="Block Added"
               />
             </Grid>
-            
+
           </Grid>
           <Grid container spacing={3}>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
                 count={cardInfo.txCount}
                 // icon="bx bx-transfer"
@@ -331,16 +341,16 @@ const Home: React.FC = () => {
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
-                count={cardInfo.latestBlock}
+                count={2}
                 // icon="bx bxs-data"
-                title="Latest Block"
+                title="Total Validator"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <StatusCard
-                count={cardInfo.blockTime}
+                count={cardInfo.gasUsed}
                 // icon="bx bx-time"
-                title="Block Added"
+                title="Last Block Gas Used"
               />
             </Grid>
           </Grid>
@@ -368,17 +378,17 @@ const Home: React.FC = () => {
                   >
                     Blocks
                   </Button>
-                  
-                  
+
+
                   {/* <Button className="refresh-btn">Total wallets</Button> */}
-              
+
                 </div>
                 <div className="drop-sec"></div>
               </div>
               <div className="card__body api-key-table">
                 <div className="gradient-text-sec d-flex">
-                  <h5 className="gradient-text">24,049,204</h5>
-                  <span className="small-text">+1.23%</span>
+                  <h5 className="gradient-text">Total Stacked Amount: 0</h5>
+                  <span className="small-text">+0.0%</span>
                 </div>
               </div>
             </div>
@@ -398,6 +408,7 @@ const Home: React.FC = () => {
                         <th>Time At</th>
                         <th>Validate By</th>
                         <th>Gas Used</th>
+
                       </tr>
                     );
                   }}
@@ -417,7 +428,7 @@ const Home: React.FC = () => {
                               "..." +
                               block.validateBy.slice(-4)}
                           </td>
-                          <td>{block.gasUsed} SEM</td>
+                          <td> {Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas).toString(), "gwei")} SEM</td>
                         </tr>
                       );
                     };
@@ -488,8 +499,8 @@ const Home: React.FC = () => {
                                   <Link to={`/address/${tx.to}`}>
                                     {tx.to
                                       ? tx.to.slice(0, 8) +
-                                        "..." +
-                                        tx.to.slice(-4)
+                                      "..." +
+                                      tx.to.slice(-4)
                                       : "-"}
                                   </Link>
                                 </td>
