@@ -96,15 +96,39 @@ const Home: React.FC = () => {
       return [...newTransactions, ...prevTransactions];
     });
   };
+  const timeAgo = (timeAt: string) => {
+ 
+    const now: any = new Date();
+    const [hours, minutes, seconds] = timeAt.split(':').map((part) => parseInt(part, 10));
 
+    const time:any = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, seconds);
+
+    const diffInSeconds = Math.floor((now - time) / 1000);
+
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes} minutes ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours} hours ago`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days} days ago`;
+    }
+  };
   useEffect(() => {
+
     const updateInfo = async () => {
       const bnbPrice = await getPrice("BNB", "USDT").then(
         (quote) => Number(quote.price).toFixed(2) + "$"
       );
       const block = await getLatestBlock();
+      console.log(block,"12321")
       const gas = calculateGas(block);
       const timeAt = timestampToMinutes(block);
+      console.log(timeAt,"timeAt")
 
       const updateChart = () => {
         setGasPriceChart((prevGasPriceChart) => {
@@ -146,12 +170,13 @@ const Home: React.FC = () => {
           const blockExistsInTable = prevBlocks.find(
             (blck) => blck.number === block.number
           );
+
           if (blockExistsInTable) return prevBlocks;
           return [
             {
               number: block.number,
               txs: block.transactions.length,
-              timeAt: timeAt,
+              timeAt: timeAgo(timeAt),
               validateBy: block.miner,
               bnbPrice: bnbPrice,
               gasUsed: block.gasUsed,
@@ -213,7 +238,7 @@ const Home: React.FC = () => {
           {
             number: block.number,
             txs: block.transactions.length,
-            timeAt: timeAt,
+            timeAt: timeAgo(timeAt),
             validateBy: block.miner,
             bnbPrice: bnbPrice,
             gasUsed: block.gasUsed,
