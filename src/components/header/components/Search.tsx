@@ -52,12 +52,12 @@ const Search: React.FC = () => {
         const isAddress = Web3.utils.isAddress(searchValue);
 
 
-        const contractObject = new ethers.Contract("0xb504F4EA0BCD1aA6cFC782A43fccD097C0Da52dD",
-            searchAddressABI,
-            provider);
+        // const contractObject = new ethers.Contract("0xb504F4EA0BCD1aA6cFC782A43fccD097C0Da52dD",
+        //     searchAddressABI,
+        //     provider);
 
-        const result = await contractObject.checkAddress(searchValue);
-        console.log("Result: ", result, isAddress);
+        // const result = await contractObject.checkAddress(searchValue);
+        // console.log("Result: ", result, isAddress);
 
         if (isTransaction) {
             navigate(`/tx/${searchValue}`);
@@ -65,9 +65,11 @@ const Search: React.FC = () => {
         else if (isBlock) {
             navigate(`/block/${searchValue}`);
         }
-        else if (result === "User Account") {
-            navigate(`/address/${searchValue}`, { state: "USER" });
-        } else {
+        // else if (result === "User Account") {
+        //     navigate(`/address/${searchValue}`, { state: "USER" });
+        // } 
+        else 
+        {
             searchTokens(searchValue);
             navigate(`/address/${searchValue}`, { state: "CONTRACT" });
         }
