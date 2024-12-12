@@ -64,54 +64,26 @@ const AllTransactions: React.FC = () => {
       return [...newTransactions, ...prevTransactions];
     });
   }
+  function timeAgo(isoTimestamp: any) {
+    const now: any = new Date();
+    const timestamp: any = new Date(isoTimestamp);
+    const diffInSeconds = Math.floor((now - timestamp) / 1000);
 
-  useEffect(() => {
-    const run = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/txs?page=${currentPage}&limit=${limit}`)
-      setCurrentPage(response.data.data?.meta.current_page);
-      setLimit(response.data.data?.meta?.per_page);
-      setTotalTx(response.data.data?.meta?.total);
-      setLastPage(response.data.data?.meta?.last_page);
-
-      setLatestTransactions((prevTransactions) => {
-        const prevHashes = prevTransactions.map((tx) => tx.hash);
-        const newTransactions = response.data.data.transactions
-          .filter((tx: any) => !prevHashes.includes(tx.hash))
-          .map((tx: any) => {
-            const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
-            return {
-              hash: tx.transaction_hash,
-              blocknumber: tx.blockNumber,
-              from: tx.from,
-              to: tx.to,
-              value: (tx.value / 10 ** 18).toString(),
-              gasPrice: gasInEther,
-              age: tx.timestamp,
-            };
-          });
-        return [...newTransactions, ...prevTransactions];
-      });
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes} minutes ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours} hours ago`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days} days ago`;
     }
-  }, []);
+  }
   useEffect(() => {
-    function timeAgo(isoTimestamp: any) {
-      const now: any = new Date();
-      const timestamp: any = new Date(isoTimestamp);
-      const diffInSeconds = Math.floor((now - timestamp) / 1000);
-
-      if (diffInSeconds < 60) {
-        return `${diffInSeconds} seconds ago`;
-      } else if (diffInSeconds < 3600) {
-        const minutes = Math.floor(diffInSeconds / 60);
-        return `${minutes} minutes ago`;
-      } else if (diffInSeconds < 86400) {
-        const hours = Math.floor(diffInSeconds / 3600);
-        return `${hours} hours ago`;
-      } else {
-        const days = Math.floor(diffInSeconds / 86400);
-        return `${days} days ago`;
-      }
-    }
+    
     const updateInfo = async () => {
       // const bnbPrice = await getPrice("BNB", "USDT").then(
       //   (quote) => Number(quote.price).toFixed(2) + "$"
@@ -144,7 +116,7 @@ const AllTransactions: React.FC = () => {
                 to: add,
                 value: (tx.value / 10 ** 18).toString(),
                 gasPrice: gasInEther,
-                age: timeAgo(tx.timestamp)
+                age: (tx.timestamp)
               };
             });
           return [...newTransactions, ...prevTransactions];
@@ -190,7 +162,7 @@ const AllTransactions: React.FC = () => {
                       {tx.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}
                     </Link>
                   </td>
-                  <td>{tx.age}</td>
+                  <td>{timeAgo(tx.age)}</td>
                   <td>
                     <Link to={`/block/${tx.blocknumber}`}>
                       {tx.blocknumber}

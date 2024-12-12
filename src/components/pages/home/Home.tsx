@@ -406,7 +406,8 @@ const Home: React.FC = () => {
                               "..." +
                               block.validateBy.slice(-4)}
                           </td>
-                          <td> {Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas).toString(), "gwei")} SEM</td>
+                          {/* <td> {Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas.toString()).toString(), "gwei")} SEM</td> */}
+                          <td> {block.gasUsed * block.baseFeePerGas} gwei</td>
                         </tr>
                       );
                     };

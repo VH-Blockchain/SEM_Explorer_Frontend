@@ -21,6 +21,7 @@ const Blocks: React.FC = () => {
       validator: string;
       gasLimit: number;
       baseFeePerGas: number;
+      totalGas: number;
     }>
   >([]);
 
@@ -77,7 +78,8 @@ const Blocks: React.FC = () => {
             gasUsed: tx.gasUsed,
             validator: tx.miner,
             gasLimit: tx.gasLimit,
-            baseFeePerGas: baseFee
+            baseFeePerGas: baseFee,
+            totalGas: tx.gasUsed * baseFee
           };
         });
       return [...newTransactions, ...prevTransactions];
@@ -152,6 +154,7 @@ const Blocks: React.FC = () => {
               return formattedTime;
             };
             const gasInEther = (Number(21000) * Number(tx.gasUsed)) / 1e18;
+            // const baseFee = tx.baseFeePerGas ;
             const baseFee = tx.baseFeePerGas / 1e9;
             return {
               number: tx.number,
@@ -218,7 +221,7 @@ const Blocks: React.FC = () => {
                   <td>{block.gasUsed} </td>
                   <td>{block.gasLimit}</td>
                   <td>{block.baseFeePerGas} Gwei  </td>
-                  <td>{Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas).toString(), "gwei")} SEM </td>
+                  <td>{block.gasUsed * block.baseFeePerGas}  </td>
                 </tr>
               );
             };
