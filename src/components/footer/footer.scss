@@ -70,9 +70,11 @@
   }
   .map-img{
     width: 100%;
-    /* max-width: 280px; */
-    /* max-height: 168.3px; */
+    max-width: 280px;
+    max-height: 168.3px;
     height: 100%;
+    margin: 20px 0 0 0;
+    object-fit: contain;
   }
   .footer-ul .footer-li{
     margin-bottom: 12px;

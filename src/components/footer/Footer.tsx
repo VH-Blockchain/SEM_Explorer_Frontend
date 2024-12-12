@@ -4,11 +4,35 @@ import { Link } from "react-router-dom";
 import tritterIc from "../../images/twitter.svg";
 import facebookIc from "../../images/facebook.svg";
 import redditIc from "../../images/reddit.svg";
-import saveEarthLogo from "../../images/saveEarth-log.png";
+import saveEarthLogo from "../../images/SEM-Chain.png";
 import mapImg from "../../images/map.png";
-import { Tooltip } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
+import walletone from '../../images/walletOne.svg'
 
 export default function footer() {
+  const AddMetamask = async () => {
+    try {
+        await (window as any).ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+                {
+                    chainId: '0x24FEA',
+                    chainName: 'SEMChain',
+                    nativeCurrency: {
+                        name: 'SEM',
+                        symbol: 'SEM',
+                        decimals: 18,
+                    },
+                    rpcUrls: ['https://sem-live.appworkdemo.com/archive'],
+                    blockExplorerUrls: ['https://scan.semchain.org/'],
+                },
+            ],
+        });
+    } catch (error) {
+        console.error('Error adding network:', error);
+    }
+
+}
   return (
     // <div className='footer-main'>
     //   <p className='mb-0'>Copyright © 2024 SEMchain | All Rights Reserved.</p>
@@ -71,7 +95,7 @@ export default function footer() {
                 <Link className="common-text  footer-link" to={"#"}>Careers</Link>
               </li>
               <li className="footer-li">
-                <Link className="common-text  footer-link" to={"#"}>Terms & Privacy</Link>
+                <Link className="common-text  footer-link" to={"privacy-policy"}>Terms & Privacy</Link>
               </li>
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Bug Bounty</Link>
@@ -119,6 +143,12 @@ export default function footer() {
             </ul>
           </div>
           <div className="footer-col">
+          <div className="mic">
+                            {/* <i className="mic-icon"></i> */}
+                            {/* <p>Add SEMNetwork</p> */}
+                            <Button className="metamask-btn" onClick={AddMetamask}><img src={walletone} alt="walletone" className='matamask-btn' />Add Polygon Network</Button>
+                            {/* <div className="mic-shadow"></div> */}
+                        </div>
           <img src={mapImg} alt="company logo" className="map-img" />
           </div>
         </div>
