@@ -22,7 +22,7 @@ function Supply() {
 
         <div className="distrubution-sec">
           <Grid container spacing={3}>
-            <Grid item lg={5} md={6} sm={6} xs={5}>
+            <Grid item lg={5} md={12} sm={12} xs={12}>
               <Grid container spacing={3}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   <div className="card">
@@ -155,12 +155,12 @@ function Supply() {
                 </Grid> */}
               </Grid>
             </Grid>
-            <Grid item lg={7} md={6} sm={6} xs={7}>
+            <Grid item lg={7} md={12} sm={12} xs={12}>
               <div className="card">
                 <div className="inner-card-sec">
                   <div className="inner-card">
                     <h6>120,444,878.50</h6>
-                    <p>Total Ether Supply</p>
+                    <p>Total SEM Supply</p>
                   </div>
                   <div className="inner-card">
                     <h6>$443,269,816,998.00</h6>

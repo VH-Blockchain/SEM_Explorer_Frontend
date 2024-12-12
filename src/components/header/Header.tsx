@@ -313,7 +313,7 @@ const Header: React.FC = () => {
       >
        
         <li className="position-relative sub-menu-li m-0">
-        Blockchain<KeyboardArrowDownTwoToneIcon />
+          <span>Blockchain<KeyboardArrowDownTwoToneIcon /></span>
           <ul className="header-sub-ul">
             <li className="header-sub-li">
               <Link to={"txs"} className="header-sub-link">
@@ -329,7 +329,7 @@ const Header: React.FC = () => {
         </li>
         
         <li className="position-relative sub-menu-li m-0">
-        Tokens <KeyboardArrowDownTwoToneIcon />
+        <span>Tokens <KeyboardArrowDownTwoToneIcon /></span>
           <ul className="header-sub-ul">
             <li className="header-sub-li">
               <Link to={"#"} className="header-sub-link">
@@ -371,9 +371,9 @@ const Header: React.FC = () => {
         </li> */}
 
         <li>
-          <Button className="nav-items" onClick={() => navigate("/faucet")}>
+          <div className="nav-items" onClick={() => navigate("/faucet")}>
             Faucet
-          </Button>
+          </div>
         </li>
         {/* <li>
           <Button
@@ -401,9 +401,9 @@ const Header: React.FC = () => {
         </li> */}
         {!token ? (
           <li>
-            <Button className="nav-items" onClick={() => navigate("/sign-in")}>
+            <div className="nav-items" onClick={() => navigate("/sign-in")}>
               Sign In
-            </Button>
+            </div>
           </li>
         ) : (
           <>
@@ -435,7 +435,7 @@ const Header: React.FC = () => {
           </>
         )}
         <li className="position-relative sub-menu-li m-0">
-          Resources
+          <span>Resources <KeyboardArrowDownTwoToneIcon /></span>
           <ul className="header-sub-ul">
             <li className="header-sub-li">
               <Link to={"supply"} className="header-sub-link">
