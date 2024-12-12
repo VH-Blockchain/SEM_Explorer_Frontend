@@ -14,7 +14,7 @@ import textureBg2 from "../../images/texture-bg-2.svg";
 import textureBg1 from "../../images/texture-bg-1.svg";
 import textureBg from "../../images/texture-bg.svg";
 import walletone from '../../images/walletOne.svg'
-import { Button, Tooltip } from "@mui/material";
+import { Button, Tooltip } from "@mui/material"
 
 const Layout: React.FC = () => {
 
@@ -58,17 +58,16 @@ const Layout: React.FC = () => {
         <Router>
             <div className={`layout ${themesReducer.mode} ${themesReducer.color}`}>
                 <div className="layout__content">
+                    {/* <div className="overlay-sec"></div> */}
                     <Header />
                     <div className="layout__content-main">
                         <div className="texture-bg-wrape">
                         </div>
                         <Pages />
-                        <div className="mic">
-                            {/* <i className="mic-icon"></i> */}
-                            {/* <p>Add SEMNetwork</p> */}
+                        {/* <div className="mic">
                             <Button onClick={AddMetamask}><img src={walletone} alt="walletone" className='matamask-btn' /></Button>
                             <div className="mic-shadow"></div>
-                        </div>
+                        </div> */}
                         {/* <div className="matamask-btn-main">
                             <p>Add SEMNetwork</p>
                             <Button onClick={AddMetamask}><img src={walletone} alt="walletone" className='matamask-btn' /></Button>

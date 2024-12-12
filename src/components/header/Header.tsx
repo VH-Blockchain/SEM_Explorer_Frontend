@@ -1,4 +1,3 @@
-
 // import React, { useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Search from "./components/Search";
@@ -61,7 +60,6 @@
 //       window.location.href = "#/sign-in";
 //     }, 600);
 //   };
-
 
 //   return (
 //     <div className="header">
@@ -231,25 +229,23 @@
 
 // export default Header;
 
-
-
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Search from "./components/Search";
 import ThemesMenu from "../themes-menu/ThemesMenu";
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Finallogo from '../../images/Finallogo.png';
-import b4chainlogo from '../../images/b4chainlogo.png';
-import InputLabel from '@mui/material/InputLabel';
-import Menu from '@mui/material/Menu';
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Finallogo from "../../images/Finallogo.png";
+import b4chainlogo from "../../images/b4chainlogo.png";
+import InputLabel from "@mui/material/InputLabel";
+import Menu from "@mui/material/Menu";
 import { Button } from "@mui/material";
-import SearchIco from '../../images/search.svg'
+import SearchIco from "../../images/search.svg";
 import MenuItem from "@mui/material/MenuItem";
 import "./header.scss";
-import saveEarthLogo from '../../images/saveEarth-log.png';
+import saveEarthLogo from "../../images/SEM-Chain.png";
 import KeyboardArrowDownTwoToneIcon from "@mui/icons-material/KeyboardArrowDownTwoTone";
+import { toggleClassOnMultiple } from "../common/commonFunction";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -298,21 +294,23 @@ const Header: React.FC = () => {
     }, 600);
   };
 
-
   return (
     <div className="header">
       <div className="header__center">
         <Link to={"/"}>
           <div className="header__logo">
-        
             <img src={saveEarthLogo} alt="company logo" />
             {/* <h1 className="header__logo-text">SEM <br></br> <span>Explorer</span></h1> */}
           </div>
         </Link>
       </div>
       {/* <div className="header-right-sec"> */}
-      <ul className="nav-links">
-
+      <ul
+        className="nav-links"
+        onClick={() => {
+          toggleClassOnMultiple(['overlay-sec', 'nav-links'] , "")
+        }}
+      >
         <li>
           <Button
             className="nav-items"
@@ -333,7 +331,9 @@ const Header: React.FC = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={() => navigate("/AllTransactions")}>Transactions</MenuItem>
+            <MenuItem onClick={() => navigate("/AllTransactions")}>
+              Transactions
+            </MenuItem>
             {/* <MenuItem onClick={handleClose}>Pending Transactions</MenuItem> */}
             <MenuItem onClick={() => navigate("/Blocks")}>View Blocks</MenuItem>
           </Menu>
@@ -390,16 +390,19 @@ const Header: React.FC = () => {
         </li> */}
 
         <li>
-          <Button className="nav-items" onClick={() => navigate("/faucet")}>Faucet</Button>
+          <Button className="nav-items" onClick={() => navigate("/faucet")}>
+            Faucet
+          </Button>
         </li>
 
         {!token ? (
           <li>
-            <Button className="nav-items" onClick={() => navigate("/sign-in")}>Sign In</Button>
+            <Button className="nav-items" onClick={() => navigate("/sign-in")}>
+              Sign In
+            </Button>
           </li>
         ) : (
           <>
-
             {/* <li>
               <Button
                 className="nav-items"
@@ -424,6 +427,7 @@ const Header: React.FC = () => {
                 <MenuItem onClick={handleClose}>B4FSEMire Mainnet</MenuItem>
               </Menu>
             </li> */}
+            
             <li>
               <Button
                 id="basic-button"
@@ -451,6 +455,25 @@ const Header: React.FC = () => {
             </li>
           </>
         )}
+        <li className="position-relative sub-menu-li m-0">
+          Resources
+          <ul className="header-sub-ul">
+            <li className="header-sub-li">
+              <Link to={"supply"} className="header-sub-link">Chart Supply State
+              </Link>
+            </li>
+            <li className="header-sub-li">
+              <Link to={"supply"} className="header-sub-link">SEM Scanner Daily Transactions State
+              </Link>
+            </li>
+          </ul>
+        </li>
+        <li className="close-btn-li"><Button className="nav-items menu-close-btn" onClick={() => 
+              toggleClassOnMultiple(['overlay-sec', 'nav-links'] , "active")
+            } >
+             <svg height="329pt" viewBox="0 0 329.26933 329" width="329pt" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
+            </Button></li>
+            
       </ul>
 
       <div className="header__right">
@@ -460,9 +483,7 @@ const Header: React.FC = () => {
           <ThemesMenu />
         </div>
 
-        <div>
-
-        </div>
+        <div></div>
         {/* </div> */}
       </div>
     </div>

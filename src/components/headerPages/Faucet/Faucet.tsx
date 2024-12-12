@@ -56,14 +56,15 @@ const Faucet = () => {
                         <div className="card-body">
                             <div className="d-flex justify-content-center align-items-center">
                                 <FormControl>
-                                    <Box>
+                                    <Box className="wallet-add-wapper">
                                         <TextField
                                             id="requiredField"
                                             type="text"
                                             placeholder="Enter Your Wallet Address"
-                                            required sx={{ width: "600px" }}
+                                            required 
                                             value={address}
                                             onChange={(e) => setFaucetAddress(e.target.value)}
+                                            className="wallet-add-input"
                                         />
                                     </Box>
                                 </FormControl>
