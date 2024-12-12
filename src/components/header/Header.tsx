@@ -95,7 +95,7 @@
 //           >
 //             <MenuItem onClick={() => navigate("/AllTransactions")}>Transactions</MenuItem>
 //             <MenuItem onClick={handleClose}>Pending Transactions</MenuItem>
-//             <MenuItem onClick={() => navigate("/Blocks")}>View Blocks</MenuItem>
+//             <MenuItem onClick={() => navigate("/blocks")}>View Blocks</MenuItem>
 //           </Menu> */}
 //         </li>
 //         <li>
@@ -308,59 +308,40 @@ const Header: React.FC = () => {
       <ul
         className="nav-links"
         onClick={() => {
-          toggleClassOnMultiple(['overlay-sec', 'nav-links'] , "")
+          toggleClassOnMultiple(["overlay-sec", "nav-links"], "");
         }}
       >
-        <li>
-          <Button
-            className="nav-items"
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
-            Blockchain <KeyboardArrowDownTwoToneIcon />
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            <MenuItem onClick={() => navigate("/AllTransactions")}>
+       
+        <li className="position-relative sub-menu-li m-0">
+        Blockchain<KeyboardArrowDownTwoToneIcon />
+          <ul className="header-sub-ul">
+            <li className="header-sub-li">
+              <Link to={"txs"} className="header-sub-link">
               Transactions
-            </MenuItem>
-            {/* <MenuItem onClick={handleClose}>Pending Transactions</MenuItem> */}
-            <MenuItem onClick={() => navigate("/Blocks")}>View Blocks</MenuItem>
-          </Menu>
+              </Link>
+            </li>
+            <li className="header-sub-li">
+              <Link to={"blocks"} className="header-sub-link">
+              View Blocks
+              </Link>
+            </li>
+          </ul>
         </li>
-        <li>
-          <Button
-            className="nav-items"
-            id="basic-button"
-            aria-controls={open2 ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open2 ? "true" : undefined}
-            onClick={handleClick2}
-          >
-            Tokens <KeyboardArrowDownTwoToneIcon />
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl2}
-            open={open2}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            <MenuItem onClick={handleClose}>Top Tokens</MenuItem>
-            <MenuItem onClick={handleClose}>Tokens Transfers</MenuItem>
-          </Menu>
+        
+        <li className="position-relative sub-menu-li m-0">
+        Tokens <KeyboardArrowDownTwoToneIcon />
+          <ul className="header-sub-ul">
+            <li className="header-sub-li">
+              <Link to={"#"} className="header-sub-link">
+              Top Tokens
+              </Link>
+            </li>
+            <li className="header-sub-li">
+              <Link to={"#"} className="header-sub-link">
+              Tokens Transfers
+              </Link>
+            </li>
+          </ul>
         </li>
         {/* <li>
           <Button
@@ -394,7 +375,30 @@ const Header: React.FC = () => {
             Faucet
           </Button>
         </li>
-
+        {/* <li>
+          <Button
+            className="nav-items"
+            id="basic-button"
+            aria-controls={open4 ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open4 ? "true" : undefined}
+            onClick={handleClick4}
+          >
+            Scan <KeyboardArrowDownTwoToneIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl4}
+            open={open4}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>SEM Testnet</MenuItem>
+            <MenuItem onClick={handleClose}>SEM Mainnet</MenuItem>
+          </Menu>
+        </li> */}
         {!token ? (
           <li>
             <Button className="nav-items" onClick={() => navigate("/sign-in")}>
@@ -403,31 +407,6 @@ const Header: React.FC = () => {
           </li>
         ) : (
           <>
-            {/* <li>
-              <Button
-                className="nav-items"
-                id="basic-button"
-                aria-controls={open4 ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open4 ? "true" : undefined}
-                onClick={handleClick4}
-              >
-                Scan <KeyboardArrowDownTwoToneIcon />
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl4}
-                open={open4}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <MenuItem onClick={handleClose}>SEM Testnet</MenuItem>
-                <MenuItem onClick={handleClose}>B4FSEMire Mainnet</MenuItem>
-              </Menu>
-            </li> */}
-            
             <li>
               <Button
                 id="basic-button"
@@ -459,21 +438,34 @@ const Header: React.FC = () => {
           Resources
           <ul className="header-sub-ul">
             <li className="header-sub-li">
-              <Link to={"supply"} className="header-sub-link">Chart Supply State
+              <Link to={"supply"} className="header-sub-link">
+                Chart Supply State
               </Link>
             </li>
             <li className="header-sub-li">
-              <Link to={"supply"} className="header-sub-link">SEM Scanner Daily Transactions State
+              <Link to={"supply"} className="header-sub-link">
+                SEM Scanner Daily Transactions State
               </Link>
             </li>
           </ul>
         </li>
-        <li className="close-btn-li"><Button className="nav-items menu-close-btn" onClick={() => 
-              toggleClassOnMultiple(['overlay-sec', 'nav-links'] , "active")
-            } >
-             <svg height="329pt" viewBox="0 0 329.26933 329" width="329pt" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg>
-            </Button></li>
-            
+        <li className="close-btn-li">
+          <Button
+            className="nav-items menu-close-btn"
+            onClick={() =>
+              toggleClassOnMultiple(["overlay-sec", "nav-links"], "active")
+            }
+          >
+            <svg
+              height="329pt"
+              viewBox="0 0 329.26933 329"
+              width="329pt"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0" />
+            </svg>
+          </Button>
+        </li>
       </ul>
 
       <div className="header__right">

@@ -27,7 +27,7 @@ import Supply from "./pages/supply/Supply";
 const Pages = () => {
     return (
         <Routes>
-            <Route path="/" element={ <Home />} />
+           
             <Route path="/readwrite" element={<Indexer/>} />
             <Route path="/address/:address" element={ <AddressComp />} />
             <Route path="/tx/:hash" element={ <Tx />} />
@@ -40,15 +40,17 @@ const Pages = () => {
             <Route path="/sign-in" element={ <Login />} />
             <Route path="/sign-up" element={ <Signup />} />
             <Route path="/apiplans" element={ <Plans />} />
-            <Route path="/AllTransactions" element={ <AllTransactions />} />
-            <Route path="/Blocks" element={ <Blocks />} />
-            <Route path={`/*`} element={ <NotFound message='Something went wrong' /> } />
+            <Route path="/txs" element={ <AllTransactions />} />
+            <Route path="/blocks" element={ <Blocks />} />
+           
             <Route path="/plans" element={<APIPlans/>} />
             <Route path="/payment" element={<PaymentGateWay/>} />
             <Route path="/comingsoon" element={<ComingSoon/>} />
             <Route path="/faucet" element={<Faucet/>}/>
             <Route path="/privacy-policy" element={<Privacypolicy/>}/>
             <Route path="/supply" element={<Supply/>}/>
+            <Route path="/" element={ <Home />} />
+            <Route path={`/*`} element={ <NotFound message='Something went wrong' /> } />
         </Routes>
     )
 };

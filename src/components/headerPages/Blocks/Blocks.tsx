@@ -133,6 +133,7 @@ const Blocks: React.FC = () => {
 
     const updateTables = async () => {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/fetchBlocks?page=${currentPage}&limit=${limit}`)
+      console.log(response);
       setLastPage(response.data.data?.meta?.last_page);
       setCurrentPage(response.data.data?.meta.current_page);
       setLimit(response.data.data?.meta?.per_page);
@@ -177,15 +178,15 @@ const Blocks: React.FC = () => {
     <div className="card">
       <div className="card__header cus-between">
         <h3 data-tooltip="test">Latest Blocks:</h3>
-    
+
         <Pagination
           currentPage={currentPage}
           lastPage={lastPage}
           onPageChange={changePage}
           limit={limit}
         />
-          
-       
+
+
       </div>
       <div className="card__body api-key-table">
         <Table
@@ -199,6 +200,8 @@ const Blocks: React.FC = () => {
                 <th>Gas Used</th>
                 <th>Gas Limit</th>
                 <th>Base Fee</th>
+                <th>Burnt Fees</th>
+
               </tr>
             );
           }}
@@ -212,9 +215,10 @@ const Blocks: React.FC = () => {
                   <td>{block.timeAt}</td>
                   <td>{block.txs}</td>
                   <td>{block.validator.slice(0, 8) + "..." + block.validator.slice(-4)}</td>
-                  <td>{block.gasUsed} SEM</td>
+                  <td>{block.gasUsed} </td>
                   <td>{block.gasLimit}</td>
-                  <td>{block.baseFeePerGas} Gwei</td>
+                  <td>{block.baseFeePerGas} Gwei  </td>
+                  <td>{Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas).toString(), "gwei")} SEM </td>
                 </tr>
               );
             };
