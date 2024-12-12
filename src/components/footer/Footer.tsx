@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import tritterIc from "../../images/twitter.svg";
 import facebookIc from "../../images/facebook.svg";
 import redditIc from "../../images/reddit.svg";
-import saveEarthLogo from "../../images/saveEarth-log.png";
+import saveEarthLogo from "../../images/SEM-Chain.png";
 import mapImg from "../../images/map.png";
 import { Button, Tooltip } from "@mui/material";
 import walletone from '../../images/walletOne.svg'
