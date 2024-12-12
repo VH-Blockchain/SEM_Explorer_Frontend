@@ -113,10 +113,10 @@ const AllTransactions: React.FC = () => {
       }
     }
     const updateInfo = async () => {
-      const bnbPrice = await getPrice("BNB", "USDT").then(
-        (quote) => Number(quote.price).toFixed(2) + "$"
-      );
-      const block = await getLatestBlock();
+      // const bnbPrice = await getPrice("BNB", "USDT").then(
+      //   (quote) => Number(quote.price).toFixed(2) + "$"
+      // );
+      // const block = await getLatestBlock();
 
       const updateTables = async () => {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/txs?page=${currentPage}&limit=${limit}`)
@@ -136,7 +136,7 @@ const AllTransactions: React.FC = () => {
               }
               checkAddress()
 
-              const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
+              const gasInEther = (Number(tx.gasLimit) * Number(tx.gasPrice)) / 1e18;
               return {
                 hash: tx.transaction_hash,
                 blocknumber: tx.blockNumber,
