@@ -139,7 +139,7 @@ const Publish = () => {
 
         try {
             setLoading(true)
-            const response = await fetch('${process.env.REACT_APP_BASE_URL}apiauth/verify?apikey=7bf546e4-c912-4d84-9fdd-5094cdbc2bbb', {
+            const response = await fetch(`${process.env.REACT_APP_API_KEY as string}apiauth/verify?apikey=${process.env.REACT_APP_API_KEY as string}`, {
                 method: 'POST',
                 body: formData,
             });

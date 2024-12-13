@@ -30,6 +30,29 @@ const Layout: React.FC = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    const AddMetamask = async () => {
+        try {
+            await (window as any).ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                    {
+                        chainId: '0x24FEA',
+                        chainName: 'SEMChain',
+                        nativeCurrency: {
+                            name: 'SEM',
+                            symbol: 'SEM',
+                            decimals: 18,
+                        },
+                        rpcUrls: [process.env.REACT_APP_RCP_URL as string],
+                        blockExplorerUrls: [process.env.REACT_APP_BASE_URL as string],
+                    },
+                ],
+            });
+        } catch (error) {
+            console.error('Error adding network:', error);
+        }
+
+    }
     
 
     return (
