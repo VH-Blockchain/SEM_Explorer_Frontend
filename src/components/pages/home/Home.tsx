@@ -44,10 +44,10 @@ const Home: React.FC = () => {
     series:[
       {
         name: "Daily Transcation",
-        data: [1, 2, 3, 2, 7, 3]
+        data: [0, 0, 0, 0, 0, 0,0,2]
       }
     ],
-    categories: ["06 Dec", "07 Dec","08 Dec", "09 Dec","10 Dec", "11 Dec"],
+    categories: ["06 Dec", "07 Dec","08 Dec", "09 Dec","10 Dec", "11 Dec", "12 Dec", "13 Dec"],
   });
 
   const [latestBlocks, setLatestBlocks] = useState<
