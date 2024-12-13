@@ -43,8 +43,8 @@ const Layout: React.FC = () => {
                             symbol: 'SEM',
                             decimals: 18,
                         },
-                        rpcUrls: ['https://sem-live.appworkdemo.com/archive'],
-                        blockExplorerUrls: ['https://scan.semchain.org/'],
+                        rpcUrls: [process.env.REACT_APP_RCP_URL as string],
+                        blockExplorerUrls: [process.env.REACT_APP_BASE_URL as string],
                     },
                 ],
             });

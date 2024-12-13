@@ -38,7 +38,7 @@ const ReadInfo = ({ name, parameters, erc20, address }: datareader) => {
 
   // const [funcName,setFuncName] = useState([]);
 
-  const provider = new ethers.providers.JsonRpcProvider("https://sem-live.appworkdemo.com/archive"); //SEMHIT
+  const provider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_RCP_URL as string); //SEMHIT
   // let provider = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com"); //sepolia
 
   console.log("provider >>", provider);
