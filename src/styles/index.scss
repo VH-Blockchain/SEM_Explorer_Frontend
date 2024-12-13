@@ -730,7 +730,12 @@ svg#SvgjsSvg1119 {
     max-width: 250px;
     flex-direction: column;
     padding: 50px 20px 30px 20px;
-  }
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
   ul.nav-links.active {
     left: 0;
   }
