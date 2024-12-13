@@ -30,7 +30,7 @@ import { CatchingPokemonSharp } from "@mui/icons-material";
 
 const Home: React.FC = () => {
   const [cardInfo, setCardInfo] = useState({
-    bnbPrice: "?",
+  
     latestBlock: "?",
     txCount: "?",
     blockTime: "?",
@@ -39,14 +39,15 @@ const Home: React.FC = () => {
 
   const [gasPriceChart, setGasPriceChart] = useState<{
     series: ChartSeries;
-    timeAt: string[];
+    categories: string[];
   }>({
-    series: [
-      { name: "Min Price", data: [] },
-      { name: "Max Price", data: [] },
-      { name: "Avg Price", data: [] },
+    series:[
+      {
+        name: "Daily Transcation",
+        data: [1, 2, 3, 2, 7, 3]
+      }
     ],
-    timeAt: [],
+    categories: ["06 Dec", "07 Dec","08 Dec", "09 Dec","10 Dec", "11 Dec"],
   });
 
   const [latestBlocks, setLatestBlocks] = useState<
@@ -55,7 +56,7 @@ const Home: React.FC = () => {
       txs: number | string;
       timeAt: string;
       validateBy: string;
-      bnbPrice: string;
+      
       gasUsed: number;
       baseFeePerGas: number
 
@@ -76,31 +77,6 @@ const Home: React.FC = () => {
   const [lastPage, setLastPage] = useState<number>(0);
   const navigate = useNavigate();
 
-  const changePage = async (_page: number) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}internal/txs?page=${_page}&limit=${limit}`
-    );
-    console.log(response, "response");
-    setCurrentPage(response.data.data?.meta.current_page);
-    setLimit(response.data.data?.meta?.per_page);
-    setTotalTx(response.data.data?.meta?.total);
-    setLastPage(response.data.data?.meta?.last_page);
-
-    setLatestTransactions((prevTransactions) => {
-      const prevHashes = prevTransactions.map((tx) => tx.hash);
-      const newTransactions = response.data.data.transactions
-        .filter((tx: any) => !prevHashes.includes(tx.hash))
-        .map((tx: any) => {
-          return {
-            hash: tx.transaction_hash,
-            from: tx.from,
-            to: tx.to,
-            value: (tx.value / 10 ** 18).toString(),
-          };
-        });
-      return [...newTransactions, ...prevTransactions];
-    });
-  };
   const timeAgo = (timeAt: string) => {
 
     const now: any = new Date();
@@ -126,44 +102,45 @@ const Home: React.FC = () => {
   useEffect(() => {
 
     const updateInfo = async () => {
-      const bnbPrice = await getPrice("BNB", "USDT").then(
-        (quote) => Number(quote.price).toFixed(2) + "$"
-      );
+      // const bnbPrice = await getPrice("BNB", "USDT").then(
+      //   (quote) => Number(quote.price).toFixed(2) + "$"
+      // );
+      const SEMPrice=1;
       const block = await getLatestBlock();
       console.log(block, "12321")
       const gas = calculateGas(block);
       const timeAt = timestampToMinutes(block);
       console.log(timeAt, "timeAt")
 
-      const updateChart = () => {
-        setGasPriceChart((prevGasPriceChart) => {
-          const min = prevGasPriceChart.series[0];
-          const max = prevGasPriceChart.series[1];
-          const avg = prevGasPriceChart.series[2];
+      // const updateChart = () => {
+      //   setGasPriceChart((prevGasPriceChart) => {
+      //     const min = prevGasPriceChart.series[0];
+      //     const max = prevGasPriceChart.series[1];
+      //     const avg = prevGasPriceChart.series[2];
 
-          const update = (
-            array: number[],
-            newValue: number,
-            sliceBy: number = -9
-          ): number[] => {
-            return [...array.slice(sliceBy), newValue];
-          };
+      //     const update = (
+      //       array: number[],
+      //       newValue: number,
+      //       sliceBy: number = -9
+      //     ): number[] => {
+      //       return [...array.slice(sliceBy), newValue];
+      //     };
 
-          return {
-            ...prevGasPriceChart,
-            series: [
-              { ...min, data: update(min.data, gas.min) },
-              { ...max, data: update(max.data, gas.max) },
-              { ...avg, data: update(avg.data, gas.avg) },
-            ],
-            timeAt: [...prevGasPriceChart.timeAt.slice(-9), timeAt],
-          };
-        });
-      };
+      //     return {
+      //       ...prevGasPriceChart,
+      //       series: [
+      //         { ...min, data: update(min.data, gas.min) },
+      //         { ...max, data: update(max.data, gas.max) },
+      //         { ...avg, data: update(avg.data, gas.avg) },
+      //       ],
+      //       timeAt: [...prevGasPriceChart.timeAt.slice(-9), timeAt],
+      //     };
+      //   });
+      // };
 
       const updateStatusCard = () => {
         setCardInfo({
-          bnbPrice,
+         
           latestBlock: block.number.toString(),
           txCount: block.transactions.length.toString(),
           blockTime: timeAt,
@@ -185,7 +162,7 @@ const Home: React.FC = () => {
               txs: block.transactions.length,
               timeAt: (timeAt),
               validateBy: block.miner,
-              bnbPrice: bnbPrice,
+           
               gasUsed: block.gasUsed,
               baseFeePerGas: 0.5
             },
@@ -224,7 +201,7 @@ const Home: React.FC = () => {
         });
       };
       updateStatusCard();
-      updateChart();
+      // updateChart();
       updateTables();
     };
 
@@ -297,9 +274,10 @@ const Home: React.FC = () => {
                     colors: ["#6ab04c", "#2980b9", "yellow"],
 
                     xaxis: {
-                      categories: gasPriceChart.timeAt,
+                      categories: gasPriceChart.categories,
                     },
                   }}
+                  type="line"
                   height={"100%"}
                 />
               </div>
@@ -308,51 +286,51 @@ const Home: React.FC = () => {
         </section>
         <section className="status-wrape status-bg w-60">
           <Grid container spacing={3}>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={"$1.0"}
                 // icon="bx bxs-dollar-circle"
                 title="SEM Price"
               />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={cardInfo.latestBlock}
                 // icon="bx bxs-data"
                 title="Latest Block"
               />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={cardInfo.blockTime}
                 // icon="bx bx-time"
                 title="Block Added"
               />
             </Grid>
-
-          </Grid>
-          <Grid container spacing={3}>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={cardInfo.txCount}
                 // icon="bx bx-transfer"
                 title="Tx Count"
               />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={2}
                 // icon="bx bxs-data"
                 title="Total Validator"
               />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+            <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
                 count={cardInfo.gasUsed}
                 // icon="bx bx-time"
                 title="Last Block Gas Used"
               />
             </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            
           </Grid>
         </section>
       </div>
@@ -428,7 +406,8 @@ const Home: React.FC = () => {
                               "..." +
                               block.validateBy.slice(-4)}
                           </td>
-                          <td> {Web3.utils.fromWei((block.gasUsed * block.baseFeePerGas).toString(), "gwei")} SEM</td>
+                          <td> {Web3.utils.fromWei((block.gasUsed * block?.baseFeePerGas).toString(), "gwei")} SEM</td>
+                          {/* <td> {block.gasUsed * block.baseFeePerGas} gwei</td> */}
                         </tr>
                       );
                     };

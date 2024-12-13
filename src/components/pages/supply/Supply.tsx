@@ -112,7 +112,7 @@ function Supply() {
                     </div>
                   </div>
                 </Grid>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+                {/* <Grid item lg={12} md={12} sm={12} xs={12}>
                 <div className="card">
                     <div className="card__header">
                       <h3>Price per SEM Scanner </h3>
@@ -152,7 +152,7 @@ function Supply() {
                         </div>
                     </div>
                   </div>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid>
             <Grid item lg={7} md={6} sm={6} xs={7}>
