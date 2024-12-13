@@ -56,7 +56,7 @@ const Address: React.FC = () => {
     internal: [],
   });
   const [info, setInfo] = useState<{
-    bnbPrice: number;
+    SEMPrice: number;
     contract: string;
     balance: string;
     balanceUsd: string;
@@ -65,7 +65,7 @@ const Address: React.FC = () => {
     tokenSymbol: any;
     totalSupply: any;
   }>({
-    bnbPrice: 0,
+    SEMPrice: 0,
     contract: "",
     balance: "",
     balanceUsd: "",

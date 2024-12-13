@@ -45,17 +45,17 @@ export const getNormalTransactions = async (page: number, address: string) => {
 };
 
 export const getAddressInfo = async (address: string) => {
-  const bnbPrice = await getPrice("BNB", "USDT").then((quote: any) =>
-    Number(quote.price)
-  );
-  const semPrice =1;
+  // const bnbPrice = await getPrice("BNB", "USDT").then((quote: any) =>
+  //   Number(quote.price)
+  // );
+  const SEMPrice =1;
   const contract = await getCode(address);
 
   const balance = await getBalance(address).then((bal: any) =>
     Web3.utils.fromWei(bal, "ether")
   );
 
-  const balanceUsd = (Number(balance) * semPrice).toLocaleString();
+  const balanceUsd = (Number(balance) * SEMPrice).toLocaleString();
 
   const txCount = await getTransactionsCount(address);
   let tokenName: any;
@@ -81,7 +81,7 @@ export const getAddressInfo = async (address: string) => {
     totalSupply = " ";
   }
   return {
-    bnbPrice,
+    SEMPrice,
     contract,
     balance,
     balanceUsd,
