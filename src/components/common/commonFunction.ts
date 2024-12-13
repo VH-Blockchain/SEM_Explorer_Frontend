@@ -1,8 +1,8 @@
-export const toggleClass = (targetClass: string, activeClass: string) => {
+export const removeClass = (targetClass: string, activeClass: string) => {
     const element = document.querySelector(`.${targetClass}`);
     
     if (element) {
-        element.classList.toggle(activeClass); // Toggles the class on or off
+        element.classList.remove(activeClass); // Toggles the class on or off
     }
 };
 

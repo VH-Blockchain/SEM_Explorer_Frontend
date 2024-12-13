@@ -23,6 +23,7 @@ import ComingSoon from "./header/ComingSoon";
 import Faucet from "./headerPages/Faucet/Faucet";
 import Privacypolicy from "./pages/privacyPolicy/Privacypolicy";
 import Supply from "./pages/supply/Supply";
+import TransactionChart from "./pages/transactionchart/TransactionChart";
 
 const Pages = () => {
     return (
@@ -49,6 +50,7 @@ const Pages = () => {
             <Route path="/faucet" element={<Faucet/>}/>
             <Route path="/privacy-policy" element={<Privacypolicy/>}/>
             <Route path="/supply" element={<Supply/>}/>
+            <Route path="/transaction-chart" element={<TransactionChart/>}/>
             <Route path="/" element={ <Home />} />
             <Route path={`/*`} element={ <NotFound message='Something went wrong' /> } />
         </Routes>

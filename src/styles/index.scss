@@ -610,7 +610,8 @@ svg#SvgjsSvg1119 {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-  max-width: 80%;
+  // max-width: 80%;
+  max-width: 90%;
   font-size: 14px;
   margin: 20px auto 0 auto;
 }
@@ -618,7 +619,7 @@ svg#SvgjsSvg1119 {
 .legend-item {
   display: flex;
   align-items: center;
-  width: calc(100% / 2);
+  width: calc(100% / 3);
 }
 
 .legend-color {
@@ -728,7 +729,7 @@ svg#SvgjsSvg1119 {
     width: 100%;
     max-width: 250px;
     flex-direction: column;
-    padding: 30px;
+    padding: 50px 20px 30px 20px;
   }
   ul.nav-links.active {
     left: 0;
@@ -782,7 +783,7 @@ width: 490px;
   background: transparent;
     box-shadow: none;
     border: none;
-    padding: 0px 0 0 10px;
+    padding: 0px 0 0 0px;
     width: 100%;
 }
 .layout.theme-mode-dark .nav-links li .header-sub-li:hover {
@@ -791,6 +792,19 @@ width: 490px;
 }
 .layout.theme-mode-dark .nav-links li .header-sub-li:hover a {
   color: #5db64c !important;
+}
+.sub-menu-li span {
+  width: 100%;
+  justify-content: space-between;
+}
+// .header-sub-ul.active{
+//   display: block !important;
+// }
+// .nav-links li:hover .header-sub-ul {
+//   display: unset !important;
+// }
+.legend-item {
+  width: calc(100% / 2);
 }
 }
 @media screen and (max-width: 767px) {
@@ -927,7 +941,8 @@ font-size: 14px;
 }
 .custom-legend {
   max-width: 63%;
-  font-size: 11px;
+  font-size: 15px;
+  gap: 5px;
 }
 .auth-inner {
   width: 100%;
@@ -944,6 +959,9 @@ font-size: 16px;
   top: 50%;
   transform: translateY(-50%);
 }
+.legend-item {
+  width: 100%;
+}
 }
 
 .layout.theme-mode-dark .pagination-sec .pagination-ul .pagination-li span {
@@ -952,4 +970,49 @@ font-size: 16px;
 }
 .layout.theme-mode-dark .pagination-sec .pagination-ul .pagination-li span svg {
   filter: brightness(1) saturate(100%);
+}
+.tx-chart-page .supply-title-text{
+color: var(--txt-color);
+}
+.apexcharts-theme-light .apexcharts-yaxis-label,
+.apexcharts-theme-light .apexcharts-xaxis-label{
+  fill: rgb(102, 102, 102);
+}
+.highlight-sec{
+  padding: 16px 0;
+  border-top: 1px solid rgb(233 236 239 / 40%);
+  // border-bottom: 1px solid rgb(233 236 239 / 40%);
+}
+.highlight-sec {
+  color: var(--txt-color);
+  p{
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  img{
+    width: 20px;
+    height: 20px;
+  }
+  h6{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+}
+.about-sec {
+  .about-content{
+    font-size: 14px;
+    }
+    h5{
+      font-size: 18px;
+    }
+}
+.zoom-text{
+  margin: 0;
+  font-size: 12px;
+  color: rgb(102, 102, 102);
+}
+.apexcharts-theme-light .apexcharts-zoom-icon svg, .apexcharts-theme-light .apexcharts-zoomin-icon svg, .apexcharts-theme-light .apexcharts-zoomout-icon svg, .apexcharts-theme-light .apexcharts-reset-icon svg, .apexcharts-theme-light .apexcharts-pan-icon svg, .apexcharts-theme-light .apexcharts-selection-icon svg, .apexcharts-theme-light .apexcharts-menu-icon svg, .apexcharts-theme-light .apexcharts-toolbar-custom-icon svg, .apexcharts-theme-light .apexcharts-yaxis-label, .apexcharts-theme-light .apexcharts-xaxis-label {
+  fill: #818181;
 }

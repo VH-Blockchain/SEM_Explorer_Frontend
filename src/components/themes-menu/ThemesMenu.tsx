@@ -6,7 +6,7 @@ import { ThemesMode, ThemesColors, ThemeMode, ThemeColor, LigthMode, DarkMode } 
 
 import './themes-menu.scss';
 import { Button } from "@mui/base";
-import { toggleClass, toggleClassOnMultiple } from "../common/commonFunction";
+import { toggleClassOnMultiple } from "../common/commonFunction";
 
 const ThemesMenu: React.FC = () => {
     const dispath = useTypedDispatch();
@@ -92,14 +92,6 @@ const ThemesMenu: React.FC = () => {
         document.body.classList.add(colorClass?.class as string);
     }, []);
 
-
-    // const toggleClass = (targetClass: string, activeClass: string) => {
-    //     const element = document.querySelector(`.${targetClass}`);
-        
-    //     if (element) {
-    //         element.classList.toggle(activeClass); // Toggles the class on or off
-    //     }
-    // };
 
 
 
