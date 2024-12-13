@@ -554,7 +554,7 @@ svg#SvgjsSvg1119 {
   gap: 24px;
   .inner-card {
     box-shadow: 0 0.5rem 1.2rem rgb(189 197 209 / 20%);
-    padding: 0.75rem;
+    padding: 1.5rem;
     border-radius: 0.75rem;
     -webkit-border-radius: 0.75rem;
     -moz-border-radius: 0.75rem;
@@ -570,6 +570,7 @@ svg#SvgjsSvg1119 {
       color: var(--txt-color);
       font-size: 14.4992px;
       line-height: 21.7488px;
+      margin: 0;
     }
   }
 }
@@ -610,7 +611,8 @@ svg#SvgjsSvg1119 {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-  max-width: 80%;
+  // max-width: 80%;
+  max-width: 90%;
   font-size: 14px;
   margin: 20px auto 0 auto;
 }
@@ -618,7 +620,7 @@ svg#SvgjsSvg1119 {
 .legend-item {
   display: flex;
   align-items: center;
-  width: calc(100% / 2);
+  width: calc(100% / 3);
 }
 
 .legend-color {
@@ -724,12 +726,17 @@ svg#SvgjsSvg1119 {
     top: 0;
     bottom: 0;
     left: -100%;
-    z-index: 999;
+    z-index: 999999;
     width: 100%;
     max-width: 250px;
     flex-direction: column;
-    padding: 30px;
-  }
+    padding: 50px 20px 30px 20px;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
   ul.nav-links.active {
     left: 0;
   }
@@ -766,6 +773,45 @@ width: 490px;
   .menu-btn{
     display: flex;
   }
+  .nav-links li{
+    padding: 0;
+  }
+  .legend-item {
+    width: 100%;
+  }
+  .header ul.nav-links li {
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.nav-links li:hover .header-sub-ul{
+  position: unset;
+  background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0px 0 0 0px;
+    width: 100%;
+}
+.layout.theme-mode-dark .nav-links li .header-sub-li:hover {
+  background: transparent;
+  color: #5db64c;
+}
+.layout.theme-mode-dark .nav-links li .header-sub-li:hover a {
+  color: #5db64c !important;
+}
+.sub-menu-li span {
+  width: 100%;
+  justify-content: space-between;
+}
+// .header-sub-ul.active{
+//   display: block !important;
+// }
+// .nav-links li:hover .header-sub-ul {
+//   display: unset !important;
+// }
+.legend-item {
+  width: calc(100% / 2);
+}
 }
 @media screen and (max-width: 767px) {
   .layout-inner-wrape .info.w-40 {
@@ -893,5 +939,86 @@ font-size: 16px;
 .quis-sec p{
 font-size: 14px;
 }
+.inner-card-sec {
+  grid-template-columns: repeat(1, 1fr);
+}
+.supply-main {
+  padding: 0px 0px;
+}
+.custom-legend {
+  max-width: 63%;
+  font-size: 15px;
+  gap: 5px;
+}
+.auth-inner {
+  width: 100%;
+  padding: 30px 20px 30px 20px;
+}
+.auth-inner label{
+font-size: 16px;
+}
+.custom-control.custom-checkbox{
+  display: flex;
+  gap: 5px;
+}
+.fauset-alert .alert-close-btn {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.legend-item {
+  width: 100%;
+}
 }
 
+.layout.theme-mode-dark .pagination-sec .pagination-ul .pagination-li span {
+  background: #47484a;
+  color: #ffffff;
+}
+.layout.theme-mode-dark .pagination-sec .pagination-ul .pagination-li span svg {
+  filter: brightness(1) saturate(100%);
+}
+.tx-chart-page .supply-title-text{
+color: var(--txt-color);
+}
+.apexcharts-theme-light .apexcharts-yaxis-label,
+.apexcharts-theme-light .apexcharts-xaxis-label{
+  fill: rgb(102, 102, 102);
+}
+.highlight-sec{
+  padding: 16px 0;
+  border-top: 1px solid rgb(233 236 239 / 40%);
+  // border-bottom: 1px solid rgb(233 236 239 / 40%);
+}
+.highlight-sec {
+  color: var(--txt-color);
+  p{
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  img{
+    width: 20px;
+    height: 20px;
+  }
+  h6{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+}
+.about-sec {
+  .about-content{
+    font-size: 14px;
+    }
+    h5{
+      font-size: 18px;
+    }
+}
+.zoom-text{
+  margin: 0;
+  font-size: 12px;
+  color: rgb(102, 102, 102);
+}
+.apexcharts-theme-light .apexcharts-zoom-icon svg, .apexcharts-theme-light .apexcharts-zoomin-icon svg, .apexcharts-theme-light .apexcharts-zoomout-icon svg, .apexcharts-theme-light .apexcharts-reset-icon svg, .apexcharts-theme-light .apexcharts-pan-icon svg, .apexcharts-theme-light .apexcharts-selection-icon svg, .apexcharts-theme-light .apexcharts-menu-icon svg, .apexcharts-theme-light .apexcharts-toolbar-custom-icon svg, .apexcharts-theme-light .apexcharts-yaxis-label, .apexcharts-theme-light .apexcharts-xaxis-label {
+  fill: #818181;
+}

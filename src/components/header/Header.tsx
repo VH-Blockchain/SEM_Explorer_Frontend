@@ -312,9 +312,11 @@ const Header: React.FC = () => {
         }}
       >
        
-        <li className="position-relative sub-menu-li m-0">
-        Blockchain<KeyboardArrowDownTwoToneIcon />
-          <ul className="header-sub-ul">
+        <li className="position-relative sub-menu-li m-0" onClick={() => {
+          toggleClassOnMultiple(["nav-link-1"], "active");
+        }}>
+          <span>Blockchain<KeyboardArrowDownTwoToneIcon /></span>
+          <ul className="header-sub-ul nav-link-1">
             <li className="header-sub-li">
               <Link to={"txs"} className="header-sub-link">
               Transactions
@@ -328,9 +330,11 @@ const Header: React.FC = () => {
           </ul>
         </li>
         
-        <li className="position-relative sub-menu-li m-0">
-        Tokens <KeyboardArrowDownTwoToneIcon />
-          <ul className="header-sub-ul">
+        <li className="position-relative sub-menu-li m-0" onClick={() => {
+          toggleClassOnMultiple(["nav-link-1"], "active");
+        }}>
+        <span>Tokens <KeyboardArrowDownTwoToneIcon /></span>
+          <ul className="header-sub-ul nav-link-2">
             <li className="header-sub-li">
               <Link to={"#"} className="header-sub-link">
               Top Tokens
@@ -371,9 +375,9 @@ const Header: React.FC = () => {
         </li> */}
 
         <li>
-          <Button className="nav-items" onClick={() => navigate("/faucet")}>
+          <div className="nav-items" onClick={() => navigate("/faucet")}>
             Faucet
-          </Button>
+          </div>
         </li>
         {/* <li>
           <Button
@@ -401,9 +405,9 @@ const Header: React.FC = () => {
         </li> */}
         {!token ? (
           <li>
-            <Button className="nav-items" onClick={() => navigate("/sign-in")}>
+            <div className="nav-items" onClick={() => navigate("/sign-in")}>
               Sign In
-            </Button>
+            </div>
           </li>
         ) : (
           <>
@@ -434,19 +438,21 @@ const Header: React.FC = () => {
             </li>
           </>
         )}
-        <li className="position-relative sub-menu-li m-0">
-          Resources
-          <ul className="header-sub-ul">
+        <li className="position-relative sub-menu-li m-0" onClick={() => {
+          toggleClassOnMultiple(["nav-link-3"], "active");
+        }}>
+          <span>Resources <KeyboardArrowDownTwoToneIcon /></span>
+          <ul className="header-sub-ul nav-link-3">
             <li className="header-sub-li">
               <Link to={"supply"} className="header-sub-link">
                 Chart Supply State
               </Link>
             </li>
-            <li className="header-sub-li">
-              <Link to={"supply"} className="header-sub-link">
+            {/* <li className="header-sub-li">
+              <Link to={"transaction-chart"} className="header-sub-link">
                 SEM Scanner Daily Transactions State
               </Link>
-            </li>
+            </li> */}
           </ul>
         </li>
         <li className="close-btn-li">

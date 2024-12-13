@@ -85,21 +85,21 @@ export default function footer() {
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>About Us</Link>
               </li>
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Brand Assets</Link>
-              </li>
+              </li> */}
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Contact Us</Link>
               </li>
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Careers</Link>
-              </li>
+              </li> */}
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"privacy-policy"}>Terms & Privacy</Link>
               </li>
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Bug Bounty</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="footer-col">
@@ -108,21 +108,21 @@ export default function footer() {
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>API Documentation</Link>
               </li>
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Knowledge Base</Link>
-              </li>
+              </li> */}
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Network Status</Link>
               </li>
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Newsletters</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="footer-col">
             <h6 className="footer-link-title">Products & Services</h6>
             <ul className="footer-ul p-0">
-              <li className="footer-li">
+              {/* <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Advertise</Link>
               </li>
               <li className="footer-li">
@@ -130,7 +130,7 @@ export default function footer() {
               </li>
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>API Plans</Link>
-              </li>
+              </li> */}
               <li className="footer-li">
                 <Link className="common-text  footer-link" to={"#"}>Priority Support</Link>
               </li>

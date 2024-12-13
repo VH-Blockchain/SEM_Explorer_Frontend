@@ -22,7 +22,7 @@ function Supply() {
 
         <div className="distrubution-sec">
           <Grid container spacing={3}>
-            <Grid item lg={5} md={6} sm={6} xs={5}>
+            <Grid item lg={5} md={12} sm={12} xs={12}>
               <Grid container spacing={3}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   <div className="card">
@@ -34,11 +34,11 @@ function Supply() {
                             <Grid container>
                                 <Grid item lg={7}>
                                 <p className="common-text mb-0">
-                                    Genesis (60M Crowdsale 12M Other):
+                                Staking Rewards:
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0  text-right">72,009,990.50 Ether</p>
+                                <p className="common-text mb-0  text-right">63%</p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -46,11 +46,11 @@ function Supply() {
                             <Grid container>
                                 <Grid item lg={7}>
                                 <p className="common-text mb-0">
-                                + Mining Block Rewards:
+                                Free Minting Assets:
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0 text-right">47,223,894.59 Ether</p>
+                                <p className="common-text mb-0 text-right">18%</p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -58,11 +58,11 @@ function Supply() {
                             <Grid container>
                                 <Grid item lg={7}>
                                 <p className="common-text mb-0">
-                                + Mining Uncle Rewards:
+                                Mission Task Rewards:
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0 text-right">3,139,986.13 Ether</p>
+                                <p className="common-text mb-0 text-right">9%</p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -70,11 +70,11 @@ function Supply() {
                             <Grid container>
                                 <Grid item lg={7}>
                                 <p className="common-text mb-0">
-                                + Eth2 Staking Rewards:
+                                DAO Advisors
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0 text-right">2,574,381.39 Ether</p>
+                                <p className="common-text mb-0 text-right">4.5%</p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -82,11 +82,59 @@ function Supply() {
                             <Grid container>
                                 <Grid item lg={7}>
                                 <p className="common-text mb-0">
-                                - Burnt Fees:
+                                Mission Development Fund
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0 text-right">4,503,374.11 Ether</p>
+                                <p className="common-text mb-0 text-right">1.5%</p>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div className="dist-sec">
+                            <Grid container>
+                                <Grid item lg={7}>
+                                <p className="common-text mb-0">
+                                Trade Fund
+                                </p>
+                                </Grid>
+                                <Grid item lg={5}>
+                                <p className="common-text mb-0 text-right">1.5%</p>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div className="dist-sec">
+                            <Grid container>
+                                <Grid item lg={7}>
+                                <p className="common-text mb-0">
+                                Sustainable Fund
+                                </p>
+                                </Grid>
+                                <Grid item lg={5}>
+                                <p className="common-text mb-0 text-right">1.2%</p>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div className="dist-sec">
+                            <Grid container>
+                                <Grid item lg={7}>
+                                <p className="common-text mb-0">
+                                Mission Team
+                                </p>
+                                </Grid>
+                                <Grid item lg={5}>
+                                <p className="common-text mb-0 text-right">1%</p>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div className="dist-sec">
+                            <Grid container>
+                                <Grid item lg={7}>
+                                <p className="common-text mb-0">
+                                Charity 
+                                </p>
+                                </Grid>
+                                <Grid item lg={5}>
+                                <p className="common-text mb-0 text-right">0.3%</p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -98,7 +146,7 @@ function Supply() {
                                 </p>
                                 </Grid>
                                 <Grid item lg={5}>
-                                <p className="common-text mb-0 text-right"><strong>120,444,878.50 Ether</strong></p>
+                                <p className="common-text mb-0 text-right"><strong>100%</strong></p>
                                 </Grid>
                             </Grid>
                         </div>
@@ -155,15 +203,15 @@ function Supply() {
                 </Grid> */}
               </Grid>
             </Grid>
-            <Grid item lg={7} md={6} sm={6} xs={7}>
+            <Grid item lg={7} md={12} sm={12} xs={12}>
               <div className="card">
                 <div className="inner-card-sec">
                   <div className="inner-card">
-                    <h6>120,444,878.50</h6>
-                    <p>Total Ether Supply</p>
+                    <h6>1,000,000,000</h6>
+                    <p>Total SEM Supply</p>
                   </div>
                   <div className="inner-card">
-                    <h6>$443,269,816,998.00</h6>
+                    <h6>$1.00</h6>
                     <p>Market Capitalization</p>
                   </div>
                 </div>
