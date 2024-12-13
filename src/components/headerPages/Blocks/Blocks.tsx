@@ -221,7 +221,8 @@ const Blocks: React.FC = () => {
                   <td>{block.gasUsed} </td>
                   <td>{block.gasLimit}</td>
                   <td>{block.baseFeePerGas} Gwei  </td>
-                  <td>{block.gasUsed * block.baseFeePerGas}  </td>
+                  {/* <td>{block.gasUsed * block.baseFeePerGas}  </td> */}
+                  <td> {Web3.utils.fromWei((block.gasUsed * block?.baseFeePerGas).toString(), "gwei")} SEM</td>
                 </tr>
               );
             };
