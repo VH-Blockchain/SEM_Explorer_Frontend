@@ -336,41 +336,6 @@ const Home: React.FC = () => {
       </div>
       <section className="mt-30">
         <Grid container spacing={3}>
-          <Grid item lg={12} xs={12}>
-            <div className="card">
-              {/* <div className="card__header">
-                <Button></Button>
-              </div> */}
-              <div className="card-header">
-                <div className="btn-sec">
-                  <Button className="refresh-btn active">Refresh</Button>
-                  <Button
-                    className="refresh-btn"
-                    onClick={() => navigate("/txs")}
-                  >
-                    Transactions
-                  </Button>
-                  <Button
-                    className="refresh-btn"
-                    onClick={() => navigate("/blocks")}
-                  >
-                    Blocks
-                  </Button>
-
-
-                  {/* <Button className="refresh-btn">Total wallets</Button> */}
-
-                </div>
-                <div className="drop-sec"></div>
-              </div>
-              <div className="card__body api-key-table">
-                <div className="gradient-text-sec d-flex">
-                  <h5 className="gradient-text">Total Stacked Amount: 0</h5>
-                  <span className="small-text">+0.0%</span>
-                </div>
-              </div>
-            </div>
-          </Grid>
           <Grid item lg={6} xs={12}>
             <div className="card">
               <div className="card__header">

@@ -211,8 +211,8 @@ function Supply() {
                     <p>Total SEM Supply</p>
                   </div>
                   <div className="inner-card">
-                    <h6>$1.00</h6>
-                    <p>Market Capitalization</p>
+                    {/* <h6>$1.00</h6>
+                    <p>Market Capitalization</p> */}
                   </div>
                 </div>
                 <div className="supply-chart-sec">
