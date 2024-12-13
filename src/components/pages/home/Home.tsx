@@ -288,7 +288,7 @@ const Home: React.FC = () => {
           <Grid container spacing={3}>
             <Grid item lg={4} md={4} sm={6} xs={6}>
               <StatusCard
-                count={"$1.0"}
+                count={"-"}
                 // icon="bx bxs-dollar-circle"
                 title="SEM Price"
               />
