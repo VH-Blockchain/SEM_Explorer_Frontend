@@ -54,7 +54,7 @@ const Indexer = () => {
   useEffect(() => {
     console.log("object");
     const getprovider = () => {
-      let providercheck = new ethers.providers.JsonRpcProvider("https://sem-live.appworkdemo.com/archive"); //SEMhit provider
+      let providercheck = new ethers.providers.JsonRpcProvider("https://rpc.semchain.org"); //SEMhit provider
       // let providercheck = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com/");
       setprovider(providercheck);
     };

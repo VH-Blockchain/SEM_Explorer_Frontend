@@ -46,7 +46,7 @@ const Search: React.FC = () => {
         const isBlock = (!searchValue.startsWith('0x') && Number(searchValue) && Number(searchValue) > 0);
         const isTransaction = isTransactionHash(searchValue);
 
-        const provider = new ethers.providers.JsonRpcProvider("https://sem-live.appworkdemo.com/archive"); //SEMHIT
+        const provider = new ethers.providers.JsonRpcProvider("https://rpc.semchain.org"); //SEMHIT
         // let provider = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com"); //sepolia
 
         const isAddress = Web3.utils.isAddress(searchValue);

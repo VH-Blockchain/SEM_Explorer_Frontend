@@ -2,7 +2,7 @@ import Web3 from "web3";
 import axios from "axios";
 import FormData from "form-data";
 
-export const RPC_ENDPOINT = "https://sem-live.appworkdemo.com/archive";
+export const RPC_ENDPOINT = "https://rpc.semchain.org";
 const web3 = new Web3(RPC_ENDPOINT);
 
 export const getLatestBlock = async () => web3.eth.getBlock("latest", true);

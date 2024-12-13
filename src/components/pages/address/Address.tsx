@@ -65,7 +65,7 @@ const Address: React.FC = () => {
     tokenSymbol: any;
     totalSupply: any;
   }>({
-    SEMPrice: 0,
+    bnbPrice: 0,
     contract: "",
     balance: "",
     balanceUsd: "",

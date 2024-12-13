@@ -23,7 +23,7 @@ export default function footer() {
                         symbol: 'SEM',
                         decimals: 18,
                     },
-                    rpcUrls: ['https://sem-live.appworkdemo.com/archive'],
+                    rpcUrls: ['https://rpc.semchain.org'],
                     blockExplorerUrls: ['https://scan.semchain.org/'],
                 },
             ],

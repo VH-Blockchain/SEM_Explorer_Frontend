@@ -39,7 +39,7 @@ const ContractData: React.FC<MyComponentProps> = ({ address, isverified, contrac
   const fetchContractBytecode = async () => {
     try {
       // Connect to an Ethereum node (replace with your actual node URL)
-      const provider = new ethers.providers.JsonRpcProvider('https://sem-live.appworkdemo.com/archive');
+      const provider = new ethers.providers.JsonRpcProvider('https://rpc.semchain.org');
 
       // Fetch the contract's bytecode using eth_getCode
       const bytecode = await provider.send('eth_getCode', [address, 'latest']);

@@ -63,7 +63,7 @@ export const getAddressInfo = async (address: string) => {
   let totalSupply: any;
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sem-live.appworkdemo.com/archive"
+      "https://rpc.semchain.org"
     );
 
     const contractTokenObject = new ethers.Contract(
