@@ -19,6 +19,18 @@ export const getLatestBlocksFromDB = async () =>{
 export const getBlock = async (blockNumber: string | number) =>
   web3.eth.getBlock(blockNumber, true);
 
+
+
+export const getWelComeTranscation = async (WalletAddress: string) => {
+  const apiCall = await axios
+    .get(
+      `https://eco.semchain.org/api/user/get-transcations?WalletAddress=${WalletAddress}`
+    )
+    .then((res) => {
+      return res.data.data;
+    });
+  return apiCall;
+}
 export const getTransaction = async (hash: string) =>
   isTransactionHash(hash) ? web3.eth.getTransaction(hash) : null;
 

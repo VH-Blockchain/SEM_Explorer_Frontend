@@ -7,6 +7,7 @@ import Web3 from "web3";
 import ContractData from "./ContractData";
 import { isContractVerified } from "./address.controller";
 import axios from "axios";
+import { getWelComeTranscation } from "../../../services/web3";
 
 type MyComponentProps = {
   transactions: any;
@@ -40,6 +41,17 @@ const AddressData: React.FC<MyComponentProps> = ({
       age: number | string;
     }>
   >([]);
+  const [transactionsList, setTransactionsList] = useState<
+    Array<{
+      hash: string;
+      blocknumber: number | string;
+      from: string;
+      to: string | null;
+      value: string;
+      gasPrice: number;
+      age: number | string;
+    }>
+  >([]);
   const [limit, setLimit] = useState<number>(10);
   // const [currentPage, setCurrentPage] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(0);
@@ -57,12 +69,32 @@ const AddressData: React.FC<MyComponentProps> = ({
     setTransferData(false);
     setContractData(true);
   };
+  function timeAgo(isoTimestamp: any) {
+    const now: any = new Date();
+    const timestamp: any = new Date(isoTimestamp);
+    const diffInSeconds = Math.floor((now - timestamp) / 1000);
+
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes} minutes ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours} hours ago`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days} days ago`;
+    }
+  }
   useEffect(() => {
     const run = async () => {
 
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}internal/address/${address}?page=${currentPage}&limit=${limit}`)
       console.log(response, "response")
       setLastPage(response.data.data?.meta?.last_page);
+
+
 
       setLatestTransactions((prevTransactions) => {
         const prevHashes = prevTransactions.map((tx) => tx.hash);
@@ -77,24 +109,7 @@ const AddressData: React.FC<MyComponentProps> = ({
               return add = tx.to
             }
             checkAddress()
-            function timeAgo(isoTimestamp: any) {
-              const now: any = new Date();
-              const timestamp: any = new Date(isoTimestamp);
-              const diffInSeconds = Math.floor((now - timestamp) / 1000);
 
-              if (diffInSeconds < 60) {
-                return `${diffInSeconds} seconds ago`;
-              } else if (diffInSeconds < 3600) {
-                const minutes = Math.floor(diffInSeconds / 60);
-                return `${minutes} minutes ago`;
-              } else if (diffInSeconds < 86400) {
-                const hours = Math.floor(diffInSeconds / 3600);
-                return `${hours} hours ago`;
-              } else {
-                const days = Math.floor(diffInSeconds / 86400);
-                return `${days} days ago`;
-              }
-            }
             const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
             return {
               hash: tx.transaction_hash,
@@ -125,10 +140,47 @@ const AddressData: React.FC<MyComponentProps> = ({
         console.log(err, "Error");
       });
   }, []);
+  React.useEffect(() => {
+    console.log(address, "address");
 
+    getWelComeTranscation(address).then((tx) => {
+      console.log(tx.receipt)
+      const prevTrasncation = latestTransactions;
+      if (tx?.receipt?.transactionHash) {
+
+
+
+
+
+        const gasInEther = (Number(21000) * Number(tx.gasPrice)) / 1e18;
+        // prevTrasncation.push({
+        //   hash: tx?.receipt?.transaction_hash,
+        //   blocknumber: tx?.receipt?.blockNumber,
+        //   from: tx?.receipt?.from,
+        //   to: tx?.receipt?.to,
+        //   value: (tx?.receipt?.value / 10 ** 18).toString(),
+        //   gasPrice: gasInEther,
+        //   age: timeAgo(tx?.receipt?.timestamp)
+        // })
+
+        prevTrasncation.push({
+          hash: tx?.receipt?.transactionHash,
+          blocknumber: tx?.receipt?.blockNumber,
+          from: tx?.receipt?.from,
+          to: tx?.receipt?.to,
+          value: "0.0369",
+          gasPrice: gasInEther,
+          age: "Airdrop"
+        });
+      }
+      setTransactionsList(prevTrasncation);
+    }).catch(() => {
+      setTransactionsList(latestTransactions);
+    });
+  }, [latestTransactions]);
   return (
     <>
-      
+
       <Box sx={{ marginBottom: "10px" }}>
         <Button
           className="btn btn-primary m-2 first-btn"
@@ -191,7 +243,7 @@ const AddressData: React.FC<MyComponentProps> = ({
                         </tr>
                       );
                     }}
-                    tbody={latestTransactions?.map((tx: any) => {
+                    tbody={transactionsList?.map((tx: any) => {
                       return () => {
                         return (
                           <tr key={tx?.hash}>
@@ -203,13 +255,13 @@ const AddressData: React.FC<MyComponentProps> = ({
                                 {tx?.hash.slice(0, 8) + "..." + tx.hash.slice(-4)}
                               </Link>
                             </td>
-                            <td>{tx?.age} ago</td>
+                            <td>{tx?.age} </td>
                             <td>
                               <Link
                                 target="_blank"
                                 to={`/address/${tx?.from}`}
                               >
-                                {tx?.from.slice(0,8) + "..." + tx.from.slice(-4)}
+                                {tx?.from.slice(0, 8) + "..." + tx.from.slice(-4)}
                               </Link>
                             </td>
                             <td>
@@ -217,7 +269,7 @@ const AddressData: React.FC<MyComponentProps> = ({
                                 target="_blank"
                                 to={`/address/${tx?.to}`}
                               >
-                                {tx?.to ? tx?.to.slice(0,8) + "..." + tx.to.slice(-4) : "-"}
+                                {tx?.to ? tx?.to.slice(0, 8) + "..." + tx.to.slice(-4) : "-"}
                               </Link>
                             </td>
                             <td>
